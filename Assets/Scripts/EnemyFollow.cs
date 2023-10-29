@@ -8,7 +8,7 @@ public class SC_NPCFollow : MonoBehaviour
     // NavMesh Agent variable
     NavMeshAgent agent;
     // Distance to maintain from the player
-    public float stoppingDistance = 2f;
+    public float stoppingDistance = 0.001f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class SC_NPCFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        stoppingDistance = 0.001f;
         // Calculate the direction from NPC to player
         Vector3 directionToPlayer = transformToFollow.position - transform.position;
         // Calculate the desired destination point with stopping distance
