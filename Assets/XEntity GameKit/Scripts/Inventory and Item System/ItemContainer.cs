@@ -248,6 +248,13 @@ namespace XEntity.InventoryItemSystem
             return false;
         }
 
+        public bool ContainsItemName(string itemname)
+        {
+            for (int i = 0; i < slots.Length; i++)
+                if (slots[i].slotItem.name == itemname) return true;
+            return false;
+        }
+
         //Returns true if the container contains the passed in amount of item.
         public bool ContainsItemQuantity(Item item, int amount)
         {
@@ -259,6 +266,8 @@ namespace XEntity.InventoryItemSystem
             }
             return false;
         }
+
+
 
         //Updates the UI toggle state.
         protected void ToggleUI()

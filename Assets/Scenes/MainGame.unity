@@ -6407,7 +6407,7 @@ MonoBehaviour:
   interactionRange: 2
   openAnimationName: BedroomSingleOpen
   closeAnimationName: BedroomSingleClose
-  LockedByDefault: 1
+  LockedByDefault: 0
 --- !u!95 &472641149
 Animator:
   serializedVersion: 5
@@ -8371,6 +8371,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 8839568720538273707, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
+      propertyPath: m_Name
+      value: OfficeDoor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2674951466746616315, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -8861,9 +8865,9 @@ GameObject:
   - component: {fileID: 785129898}
   - component: {fileID: 785129906}
   - component: {fileID: 785129905}
+  - component: {fileID: 785129902}
   - component: {fileID: 785129903}
   - component: {fileID: 785129904}
-  - component: {fileID: 785129902}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8901,7 +8905,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785129895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -8953,7 +8957,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.72, y: 1.298, z: 7.03}
+  m_LocalPosition: {x: 2.07, y: 1.298, z: 7.76}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10028,7 +10032,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.26723832, y: 0, z: 0, w: 0.9636305}
-  m_LocalPosition: {x: 0.13, y: 0.967, z: -0.159}
+  m_LocalPosition: {x: 0.13, y: 1.12, z: 0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

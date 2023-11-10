@@ -1,4 +1,5 @@
 using UnityEngine;
+using XEntity.InventoryItemSystem;
 
 public class DoorController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class DoorController : MonoBehaviour
 
     private Animator doorAnimator;
     private bool isOpen = false;
+
+    ItemContainer items;
 
     private void Start()
     {
@@ -35,33 +38,34 @@ public class DoorController : MonoBehaviour
             {
                 if (!LockedByDefault)
                 {
-                        if (isOpen)
+                    if (isOpen)
+                    {
+                        doorAnimator.Play(closeAnimationName);
+                        isOpen = false;
+                        if (gameObject.name == "lift")
                         {
-                            doorAnimator.Play(closeAnimationName);
-                            isOpen = false;
-                            if (gameObject.name == "lift")
-                            {
-                                print("lift interaction successful");
-                            }
-                            else
-                                print("door closed");
+                            print("lift interaction successful");
                         }
                         else
-                        {
-                            doorAnimator.Play(openAnimationName);
-                            isOpen = true;
-                            if (gameObject.name == "lift")
-                            {
-                                print("lift interaction successful");
-                            }
-                            else
-                                print("door opened");
-                        }
+                            print("door closed");
                     }
-                else if (LockedByDefault)
-                {
-                    print ("door locked");
+                    else
+                    {
+                        doorAnimator.Play(openAnimationName);
+                        isOpen = true;
+                        if (gameObject.name == "lift")
+                        {
+                            print("lift interaction successful");
+                        }
+                        else
+                            print("door opened");
+                    }
                 }
+                else if (LockedByDefault)
+                   
+                        print("door locked");
+                   
+                
                 }
             }
         }
