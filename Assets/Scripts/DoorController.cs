@@ -33,11 +33,22 @@ public class DoorController : MonoBehaviour
                 {
                     doorAnimator.Play(closeAnimationName);
                     isOpen = false;
+                    if(gameObject.name == "lift")
+                    {
+                        print ("lift interaction successful");
+                    }else
+                    print("door closed");
                 }
                 else
                 {
                     doorAnimator.Play(openAnimationName);
                     isOpen = true;
+                    if (gameObject.name == "lift")
+                    {
+                        print("lift interaction successful");
+                    }
+                    else
+                        print("door opened");
                 }
             }
         }
