@@ -1051,6 +1051,7 @@ MonoBehaviour:
   openAnimationName: MainDoorOpen
   closeAnimationName: MainDoorClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &78009183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1188,6 +1189,7 @@ MonoBehaviour:
   openAnimationName: BothOpenBasement
   closeAnimationName: BothCloseBasement
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!1 &79879108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3953062709790823504, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -1225,6 +1227,7 @@ MonoBehaviour:
   openAnimationName: BathroomHallOpen
   closeAnimationName: BathroomHallClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!65 &79879115
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1424,6 +1427,7 @@ MonoBehaviour:
   openAnimationName: BothOpenBasement
   closeAnimationName: BothCloseBasement
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!1 &108631364
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,6 +3481,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &330723644
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5737,6 +5742,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &430057462
 Animator:
   serializedVersion: 5
@@ -5779,6 +5785,7 @@ MonoBehaviour:
   openAnimationName: DoorV3Open
   closeAnimationName: DoorV3Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &433869309
 Animator:
   serializedVersion: 5
@@ -6408,6 +6415,7 @@ MonoBehaviour:
   openAnimationName: BedroomSingleOpen
   closeAnimationName: BedroomSingleClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &472641149
 Animator:
   serializedVersion: 5
@@ -6514,6 +6522,7 @@ MonoBehaviour:
   openAnimationName: RightDoorOpen
   closeAnimationName: RightDoorClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!208 &501842204
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -6670,6 +6679,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &520144372
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7462,6 +7472,7 @@ MonoBehaviour:
   openAnimationName: LeftDoorOpen
   closeAnimationName: LeftDoorClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!208 &652778456
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -8851,6 +8862,7 @@ MonoBehaviour:
   openAnimationName: KitchenLeftOpen
   closeAnimationName: KitchenLeftClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!1 &785129895
 GameObject:
   m_ObjectHideFlags: 0
@@ -8957,7 +8969,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.07, y: 1.298, z: 7.76}
+  m_LocalPosition: {x: -5.21, y: 1.298, z: 9.45}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9176,6 +9188,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &808699931
 Animator:
   serializedVersion: 5
@@ -9524,6 +9537,7 @@ MonoBehaviour:
   openAnimationName: Hall2Open
   closeAnimationName: Hall2Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &849351100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9603,6 +9617,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &860381387
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9785,6 +9800,25 @@ MonoBehaviour:
   openAnimationName: GarageOpen
   closeAnimationName: GarageClose
   LockedByDefault: 0
+  requiredItemName: 
+--- !u!1 &897524415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2526857618324426094, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
+  m_PrefabInstance: {fileID: 1920004640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &897524419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897524415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9f9f277c34ce34d9ad5d1244944ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harvestItem: {fileID: 11400000, guid: 12f518faf0360844683098bcd56487ab, type: 2}
 --- !u!1001 &900177525
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9915,6 +9949,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &915822387
 Animator:
   serializedVersion: 5
@@ -10572,6 +10607,7 @@ MonoBehaviour:
   openAnimationName: RightDoorOpenW
   closeAnimationName: RightDoorCloseW
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!95 &1073377708
 Animator:
   serializedVersion: 5
@@ -11065,6 +11101,7 @@ MonoBehaviour:
   openAnimationName: DoorV3Open
   closeAnimationName: DoorV3Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1099910875
 Animator:
   serializedVersion: 5
@@ -11961,6 +11998,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1147036433
 Animator:
   serializedVersion: 5
@@ -12024,6 +12062,7 @@ MonoBehaviour:
   openAnimationName: OfficeDoorOpen
   closeAnimationName: OfficeDoorClose
   LockedByDefault: 1
+  requiredItemName: Apple
 --- !u!95 &1157345395
 Animator:
   serializedVersion: 5
@@ -12310,6 +12349,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1191162015
 Animator:
   serializedVersion: 5
@@ -12368,6 +12408,7 @@ MonoBehaviour:
   openAnimationName: BathroomRightOpen
   closeAnimationName: BathroomRightClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!95 &1194845224
 Animator:
   serializedVersion: 5
@@ -12862,6 +12903,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &1215778504
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13533,6 +13575,7 @@ MonoBehaviour:
   openAnimationName: BathroomLeftOpen
   closeAnimationName: BathroomLeftClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!95 &1285719377
 Animator:
   serializedVersion: 5
@@ -13855,6 +13898,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &1298524190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14444,6 +14488,7 @@ MonoBehaviour:
   openAnimationName: DoorV3Open
   closeAnimationName: DoorV3Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1346574723
 Animator:
   serializedVersion: 5
@@ -14689,7 +14734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784590808987301869, guid: 7c0c33055b1827549934eefe58e9eda5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.4182394
+      value: -5.59
       objectReference: {fileID: 0}
     - target: {fileID: 784590808987301869, guid: 7c0c33055b1827549934eefe58e9eda5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14697,7 +14742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784590808987301869, guid: 7c0c33055b1827549934eefe58e9eda5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.240876
+      value: 7.4
       objectReference: {fileID: 0}
     - target: {fileID: 784590808987301869, guid: 7c0c33055b1827549934eefe58e9eda5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14884,6 +14929,7 @@ MonoBehaviour:
   openAnimationName: RightKitchenOpen
   closeAnimationName: RightKitchenClose
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!95 &1385387884
 Animator:
   serializedVersion: 5
@@ -15035,6 +15081,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1387029011
 Animator:
   serializedVersion: 5
@@ -16491,6 +16538,7 @@ MonoBehaviour:
   openAnimationName: BothOpenBasement
   closeAnimationName: BothCloseBasement
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!1001 &1639481855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16809,6 +16857,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1669798061
 Animator:
   serializedVersion: 5
@@ -18091,6 +18140,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1818816524
 Animator:
   serializedVersion: 5
@@ -18154,6 +18204,7 @@ MonoBehaviour:
   openAnimationName: BothOpenBasement
   closeAnimationName: BothCloseBasement
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &1824320168
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18576,6 +18627,7 @@ MonoBehaviour:
   openAnimationName: DoorsUpOpen
   closeAnimationName: 
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &1889414193
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18990,6 +19042,7 @@ MonoBehaviour:
   openAnimationName: DoorV1Open
   closeAnimationName: DoorV1Close
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1918173147
 Animator:
   serializedVersion: 5
@@ -19025,7 +19078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3445352999058701222, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.972
+      value: -4.82
       objectReference: {fileID: 0}
     - target: {fileID: 3445352999058701222, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19033,7 +19086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3445352999058701222, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.665
+      value: 7.03
       objectReference: {fileID: 0}
     - target: {fileID: 3445352999058701222, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19080,6 +19133,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3445352999058701145, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1269835170}
+    - targetCorrespondingSourceObject: {fileID: 2526857618324426094, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 897524419}
   m_SourcePrefab: {fileID: 100100000, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
 --- !u!1001 &1925501914
 PrefabInstance:
@@ -19623,6 +19679,7 @@ MonoBehaviour:
   openAnimationName: LeftDoorOpenW
   closeAnimationName: LeftDoorCloseW
   LockedByDefault: 1
+  requiredItemName: 
 --- !u!95 &1993539660
 Animator:
   serializedVersion: 5
@@ -20607,6 +20664,7 @@ MonoBehaviour:
   openAnimationName: WhiteOpen
   closeAnimationName: WhiteClose
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!65 &2100831172
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20891,6 +20949,7 @@ MonoBehaviour:
   openAnimationName: BothOpenBasement
   closeAnimationName: BothCloseBasement
   LockedByDefault: 0
+  requiredItemName: 
 --- !u!1001 &2115680852
 PrefabInstance:
   m_ObjectHideFlags: 0

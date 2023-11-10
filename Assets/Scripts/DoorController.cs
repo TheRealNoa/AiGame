@@ -7,25 +7,25 @@ public class DoorController : MonoBehaviour
     public string openAnimationName; // Name of the door's open animation
     public string closeAnimationName; // Name of the door's close animation
     public bool LockedByDefault = false;
+    public string requiredItemName; // Name of the item required to open the door
 
     private Animator doorAnimator;
     private bool isOpen = false;
 
-    ItemContainer items;
+    ItemContainer playerInventory;
+    ItemManager manager;
 
     private void Start()
     {
         doorAnimator = GetComponent<Animator>();
+        playerInventory = FindObjectOfType<ItemContainer>();// Assuming the player's inventory is a single instance in the scene
     }
 
     private void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.E))
         {
-            {
-                TryInteractWithDoor();
-            }
+            TryInteractWithDoor();
         }
     }
 
@@ -42,31 +42,41 @@ public class DoorController : MonoBehaviour
                     {
                         doorAnimator.Play(closeAnimationName);
                         isOpen = false;
-                        if (gameObject.name == "lift")
-                        {
-                            print("lift interaction successful");
-                        }
-                        else
-                            print("door closed");
+                        print("door closed");
                     }
                     else
                     {
-                        doorAnimator.Play(openAnimationName);
-                        isOpen = true;
-                        if (gameObject.name == "lift")
+                        // Check if the required item is in the player's inventory
+                        if (playerInventory.ContainsItemName(requiredItemName))
                         {
-                            print("lift interaction successful");
+                            doorAnimator.Play(openAnimationName);
+                            isOpen = true;
+                            print("door opened");
                         }
                         else
-                            print("door opened");
+                        {
+                            print($"You need {requiredItemName} to open this door.");
+                        }
                     }
                 }
                 else if (LockedByDefault)
-                   
-                        print("door locked");
-                   
-                
+                {
+                    if(playerInventory == null)
+                    {
+                        Debug.Log("lol, inv is empty");
+                    }
+                    if (playerInventory.ContainsItemName(requiredItemName))
+                    {
+                        playerInventory.UseKey
+                        doorAnimator.Play(openAnimationName);
+                        isOpen = true;
+                        LockedByDefault = false;
+                        print("door opened");
+                    }
+                        print("door locked aaaaaaaaaaa");
+                    print($"You need {requiredItemName} to open this door.");
                 }
             }
         }
     }
+}

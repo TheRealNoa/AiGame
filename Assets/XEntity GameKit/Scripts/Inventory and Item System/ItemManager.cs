@@ -64,7 +64,7 @@ namespace XEntity.InventoryItemSystem
             slot.Remove(1);
         }
 
-        private void useKey(ItemSlot slot)
+        public void useKey(ItemSlot slot)
         {
             Debug.Log("You have used key:" + slot.slotItem.itemName);
             slot.Remove(1);
