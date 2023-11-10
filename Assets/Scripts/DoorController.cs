@@ -5,6 +5,7 @@ public class DoorController : MonoBehaviour
     public float interactionRange = 2.0f; // Adjust this to your desired interaction range
     public string openAnimationName; // Name of the door's open animation
     public string closeAnimationName; // Name of the door's close animation
+    public bool LockedByDefault = false;
 
     private Animator doorAnimator;
     private bool isOpen = false;
@@ -16,9 +17,12 @@ public class DoorController : MonoBehaviour
 
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
-            TryInteractWithDoor();
+            {
+                TryInteractWithDoor();
+            }
         }
     }
 
@@ -29,28 +33,36 @@ public class DoorController : MonoBehaviour
         {
             if (hit.collider.gameObject == gameObject)
             {
-                if (isOpen)
+                if (!LockedByDefault)
                 {
-                    doorAnimator.Play(closeAnimationName);
-                    isOpen = false;
-                    if(gameObject.name == "lift")
-                    {
-                        print ("lift interaction successful");
-                    }else
-                    print("door closed");
-                }
-                else
-                {
-                    doorAnimator.Play(openAnimationName);
-                    isOpen = true;
-                    if (gameObject.name == "lift")
-                    {
-                        print("lift interaction successful");
+                        if (isOpen)
+                        {
+                            doorAnimator.Play(closeAnimationName);
+                            isOpen = false;
+                            if (gameObject.name == "lift")
+                            {
+                                print("lift interaction successful");
+                            }
+                            else
+                                print("door closed");
+                        }
+                        else
+                        {
+                            doorAnimator.Play(openAnimationName);
+                            isOpen = true;
+                            if (gameObject.name == "lift")
+                            {
+                                print("lift interaction successful");
+                            }
+                            else
+                                print("door opened");
+                        }
                     }
-                    else
-                        print("door opened");
+                else if (LockedByDefault)
+                {
+                    print ("door locked");
+                }
                 }
             }
         }
     }
-}
