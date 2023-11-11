@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using XEntity.InventoryItemSystem;
 
 public class DoorController : MonoBehaviour
@@ -11,14 +12,44 @@ public class DoorController : MonoBehaviour
 
     private Animator doorAnimator;
     private bool isOpen = false;
+    private bool hasCycled = false;
+    private bool is_activated;
 
     ItemContainer playerInventory;
     ItemManager manager;
+    ItemRemovalController removal;
 
     private void Start()
     {
+        GameObject playerObject = GameObject.FindWithTag("PlayerInv");
+        playerInventory = playerObject.GetComponent<ItemContainer>();
         doorAnimator = GetComponent<Animator>();
-        playerInventory = FindObjectOfType<ItemContainer>();// Assuming the player's inventory is a single instance in the scene
+
+        // Find objects with ItemContainer component
+        ItemContainer[] containers = FindObjectsOfType<ItemContainer>();
+
+        // Choose the first valid container
+        foreach (ItemContainer container in containers)
+        {
+            if (container != null)
+            {
+                playerInventory = container;
+                break;
+            }
+        }
+
+        removal = FindObjectOfType<ItemRemovalController>();
+
+        // Check if playerInventory is still null
+        if (playerInventory == null)
+        {
+            Debug.LogWarning("ItemContainer not found in the scene or doesn't have the required component.");
+        }
+
+        if (removal == null)
+        {
+            Debug.LogWarning("ItemRemovalController not found in the scene.");
+        }
     }
 
     private void Update()
@@ -29,6 +60,49 @@ public class DoorController : MonoBehaviour
         }
     }
 
+    private void RemoveItem()
+    {
+        // Check if the player's inventory is assigned
+        if (playerInventory != null)
+        {
+            // Check if the inventory contains the item
+            if (playerInventory.ContainsItemName(requiredItemName))
+            {
+                // Find the slot with the item and remove it
+                ItemSlot slotToRemove = FindItemSlot(requiredItemName);
+                if (slotToRemove != null)
+                {
+                    slotToRemove.Remove(1);
+                    Debug.Log($"Removed {requiredItemName} from inventory.");
+                    is_activated = false;
+                }
+            }
+            else
+            {
+                Debug.Log($"Inventory does not contain {requiredItemName}.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Player inventory is not assigned!");
+        }
+    }
+
+    private ItemSlot FindItemSlot(string itemName)
+    {
+        // Get the list of slots from the ItemContainer
+        var slots = playerInventory.GetSlots();
+
+        // Iterate through the inventory slots and find the slot with the specified item
+        foreach (ItemSlot slot in slots)
+        {
+            if (!slot.IsEmpty && slot.slotItem.name == itemName)
+            {
+                return slot;
+            }
+        }
+        return null;
+    }
     private void TryInteractWithDoor()
     {
         RaycastHit hit;
@@ -47,7 +121,7 @@ public class DoorController : MonoBehaviour
                     else
                     {
                         // Check if the required item is in the player's inventory
-                        if (playerInventory.ContainsItemName(requiredItemName))
+                        if (requiredItemName=="" || hasCycled || (!LockedByDefault))
                         {
                             doorAnimator.Play(openAnimationName);
                             isOpen = true;
@@ -61,20 +135,24 @@ public class DoorController : MonoBehaviour
                 }
                 else if (LockedByDefault)
                 {
-                    if(playerInventory == null)
+                    if (playerInventory == null)
                     {
-                        Debug.Log("lol, inv is empty");
+                        Debug.Log("Inventory is empty.");
                     }
-                    if (playerInventory.ContainsItemName(requiredItemName))
+                    else if (playerInventory.ContainsItemName(requiredItemName))
                     {
-                        playerInventory.UseKey
                         doorAnimator.Play(openAnimationName);
                         isOpen = true;
                         LockedByDefault = false;
                         print("door opened");
+                        RemoveItem();
+                        hasCycled = true;
                     }
+                    else
+                    {
                         print("door locked aaaaaaaaaaa");
-                    print($"You need {requiredItemName} to open this door.");
+                        print($"You need {requiredItemName} to open this door.");
+                    }
                 }
             }
         }

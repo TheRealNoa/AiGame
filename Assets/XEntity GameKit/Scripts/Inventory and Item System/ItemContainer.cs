@@ -35,6 +35,9 @@ namespace XEntity.InventoryItemSystem
         protected bool isUIInitialized;
         protected Transform containerPanel;
 
+
+
+
         private List<SlotOptionButtonInfo> slotOptionButtonInfoList;
 
         protected virtual void OnEnable() 
@@ -71,12 +74,16 @@ namespace XEntity.InventoryItemSystem
         }
 
         //All the container variables are assigned here based.
+
+
         protected virtual void InitializeContainer()
         {
             IntialzieMainUI(transform);
             CreateSlotOptionsMenu(InteractionSettings.Current.internalSlotOptions, containerInteractor);
             isUIInitialized = true;
         }
+
+
 
         protected void IntialzieMainUI(Transform containerPanel)
         {
@@ -240,6 +247,8 @@ namespace XEntity.InventoryItemSystem
             return false;
         }
 
+
+
         //Returns true if the container contains the passed in item.
         public bool ContainsItem(Item item)
         {
@@ -250,9 +259,27 @@ namespace XEntity.InventoryItemSystem
 
         public bool ContainsItemName(string itemname)
         {
-            for (int i = 0; i < slots.Length; i++)
-                if (slots[i].slotItem.name == itemname) return true;
-            return false;
+            if (slots != null)
+            {
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (slots[i] != null && slots[i].slotItem != null && slots[i].slotItem.name == itemname)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+            {
+                Debug.LogError("Slots array is not initialized.");
+                return false;
+            }
+        }
+
+        public ItemSlot[] GetSlots()
+        {
+            return slots;
         }
 
         //Returns true if the container contains the passed in amount of item.

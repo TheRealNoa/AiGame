@@ -32,6 +32,8 @@ namespace XEntity.InventoryItemSystem
 
         //Returns true if its able to add the item to the slot.
         //NOTE: Items are stacked if they are of the same type.
+
+
         public bool Add(Item item) 
         {
             if (IsAddable(item))

@@ -41,6 +41,10 @@ namespace XEntity.InventoryItemSystem
         public void UseItem(ItemSlot slot) 
         {
             if (slot.IsEmpty) return;
+            if (slot.slotItem.name=="Apple")
+            {
+                print("APPLEE");
+            }
 
             //Add custom item functions ###################################################################################################
             switch (slot.slotItem.type) 
@@ -84,6 +88,7 @@ namespace XEntity.InventoryItemSystem
         {
             Debug.Log($"Using {slot.slotItem.itemName}.");
         }
+        /// ----------------------------------------------
 
 
         //Returns the item from itemList at index.
