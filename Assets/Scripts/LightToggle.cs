@@ -2,91 +2,57 @@ using UnityEngine;
 
 public class LightToggle : MonoBehaviour
 {
-    private Light myLight;
-    public bool allLightsOff;
-    public bool isOn;
+    private Light targetLight;
+    private bool canToggle = false;
 
     void Start()
     {
-        // Get the Light component attached to the same GameObject
-        myLight = GetComponent<Light>();
+        targetLight = GetComponent<Light>();
 
-        // Ensure the light component is found
-        if (myLight == null)
+        if (targetLight == null)
         {
-            Debug.LogError("Light component not found on: " + gameObject.name);
-            enabled = false; // Disable the script to prevent errors
+            Debug.LogError("Light component not found on the same GameObject. Please attach a Light component.");
         }
-        myLight.enabled = false;
     }
 
     void Update()
     {
-        // Check for input to toggle the light state
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (canToggle && Input.GetKeyDown(KeyCode.Space))
         {
-            ToggleLight(); // This should detect raycast to a switch
+            ToggleLight();
         }
-        else {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                ToggleAll();
-            }
+        else if (!canToggle && Input.GetKeyDown(KeyCode.Space))
+        {
+            targetLight.enabled = false;
+            Debug.Log("You can't because All lights have been switched off");
         }
-        
     }
 
     void ToggleLight()
     {
-        if (!allLightsOff)
+        if (targetLight != null)
         {
-            if (!isOn)
+            if(targetLight.enabled)
             {
-                isOn = true;
-                myLight.enabled = true;
+                targetLight.enabled = false;
             }
-            else if (isOn)
+            else
             {
-                isOn = false;
-                myLight.enabled = false;
+                targetLight.enabled=true;
             }
-            else if (allLightsOff)
-            {
-                if (!isOn)
-                {
-                    isOn = true;
-                    myLight.enabled = true;
-                }
-                else if (isOn)
-                {
-                    isOn = false;
-                    myLight.enabled = false;
-                }
-                // Log the state change
-                Debug.Log("Light is " + (myLight.enabled ? "ON" : "OFF"));
-            }
+        }
+        else
+        {
+            Debug.LogError("Light component not found. Please attach a Light component.");
         }
     }
-    public void ToggleAll()
+
+    public void SetToggleState(bool state)
     {
-        if (!allLightsOff)
+        canToggle = state;
+        if (!canToggle)
         {
-            if (isOn)
-            {
-                myLight.enabled = false;
-                isOn = true;
-                ToggleLight();
-                allLightsOff = true;
-            }
-            
+            targetLight.enabled = false; // Automatically turn off the light when canToggle is false
         }
-        else if (allLightsOff)// for Start of game only
-        {
-            myLight.enabled = false;
-            isOn = false;
-            allLightsOff = false;
-            ToggleLight();
-        }
-        else Debug.Log("Lol nah cuh");
     }
 }

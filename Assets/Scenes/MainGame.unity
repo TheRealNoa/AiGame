@@ -1585,8 +1585,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b07059ccc1f9840aa00aa5157cbbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRange: 2
-  OnByDefault: 0
   requiredItemName: Fuse
 --- !u!65 &94090294
 BoxCollider:
@@ -15604,8 +15602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4ca590201bcf4fbd50b4685dec74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allLightsOff: 0
-  isOn: 0
 --- !u!1001 &1453769692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17346,8 +17342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4ca590201bcf4fbd50b4685dec74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allLightsOff: 0
-  isOn: 0
 --- !u!1001 &1717460054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18201,8 +18195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a4ca590201bcf4fbd50b4685dec74a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allLightsOff: 0
-  isOn: 0
 --- !u!108 &1776978773
 Light:
   m_ObjectHideFlags: 0
