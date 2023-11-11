@@ -11,7 +11,7 @@ public class MainSwitch : MonoBehaviour
         }
     }
 
-    void ToggleAllLights()
+    public void ToggleAllLights()
     {
         // Find all game objects with the LightToggle script
         LightToggle[] lightToggleScripts = FindObjectsOfType<LightToggle>();

@@ -50,20 +50,23 @@ public class LightToggle : MonoBehaviour
                 isOn = false;
                 myLight.enabled = false;
             }
-
-
-
-            // Log the state change
-            Debug.Log("Light is " + (myLight.enabled ? "ON" : "OFF"));
-        }
-        else if (allLightsOff) {
-        if(isOn)
+            else if (allLightsOff)
             {
-                
+                if (!isOn)
+                {
+                    isOn = true;
+                    myLight.enabled = true;
+                }
+                else if (isOn)
+                {
+                    isOn = false;
+                    myLight.enabled = false;
+                }
+                // Log the state change
+                Debug.Log("Light is " + (myLight.enabled ? "ON" : "OFF"));
             }
         }
     }
-
     public void ToggleAll()
     {
         if (!allLightsOff)
@@ -71,7 +74,8 @@ public class LightToggle : MonoBehaviour
             if (isOn)
             {
                 myLight.enabled = false;
-                isOn = false;
+                isOn = true;
+                ToggleLight();
                 allLightsOff = true;
             }
             
@@ -80,6 +84,8 @@ public class LightToggle : MonoBehaviour
         {
             myLight.enabled = false;
             isOn = false;
+            allLightsOff = false;
+            ToggleLight();
         }
         else Debug.Log("Lol nah cuh");
     }

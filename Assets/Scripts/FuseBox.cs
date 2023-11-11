@@ -7,23 +7,28 @@ public class FuseBox : MonoBehaviour
     public float interactionRange = 2.0f; // Adjust this to your desired interaction range
     //public string openAnimationName; // Name of the door's open animation
     //public string closeAnimationName; // Name of the door's close animation
-    public bool LockedByDefault = false;
+    public bool OnByDefault = false;
     public string requiredItemName; // Name of the item required to open the door
 
-    private Animator doorAnimator;
-    private bool isOpen = false;
+   
+    private bool isOn = false;
     private bool hasCycled = false;
-    private bool is_activated;
+    private bool alreadyTakenFuse = false;
 
     ItemContainer playerInventory;
     ItemManager manager;
     ItemRemovalController removal;
+    MainSwitch mainSwitch;
 
     private void Start()
     {
         GameObject playerObject = GameObject.FindWithTag("PlayerInv");
         playerInventory = playerObject.GetComponent<ItemContainer>();
-        doorAnimator = GetComponent<Animator>();
+        mainSwitch = FindObjectOfType<MainSwitch>();
+        if (mainSwitch == null)
+        {
+            Debug.LogWarning("MainSwitch not found in the scene.");
+        }
 
         // Find objects with ItemContainer component
         ItemContainer[] containers = FindObjectsOfType<ItemContainer>();
@@ -74,7 +79,6 @@ public class FuseBox : MonoBehaviour
                 {
                     slotToRemove.Remove(1);
                     Debug.Log($"Removed {requiredItemName} from inventory.");
-                    is_activated = false;
                 }
             }
             else
@@ -110,48 +114,44 @@ public class FuseBox : MonoBehaviour
         {
             if (hit.collider.gameObject == gameObject)
             {
-                if (!LockedByDefault)
+                if (OnByDefault)
                 {
-                    if (isOpen)
-                    {
-                        doorAnimator.Play(closeAnimationName);
-                        isOpen = false;
-                        print("door closed");
-                    }
-                    else
-                    {
                         // Check if the required item is in the player's inventory
-                        if (requiredItemName == "" || hasCycled || (!LockedByDefault))
+                        if (alreadyTakenFuse)
                         {
-                            doorAnimator.Play(openAnimationName);
-                            isOpen = true;
-                            print("door opened");
+                            //doorAnimator.Play(openAnimationName);
+                            mainSwitch.ToggleAllLights();
+                            
+                            print("All lights have been turned off");
+                            OnByDefault = false;
                         }
                         else
                         {
-                            print($"You need {requiredItemName} to open this door.");
+                            OnByDefault = true;
+                            //print($"You need {requiredItemName} to open this door.");
+                            
                         }
-                    }
+                    
                 }
-                else if (LockedByDefault)
+                else if (!OnByDefault)
                 {
                     if (playerInventory == null)
                     {
                         Debug.Log("Inventory is empty.");
                     }
-                    else if (playerInventory.ContainsItemName(requiredItemName))
+                    else if (playerInventory.ContainsItemName(requiredItemName) || alreadyTakenFuse)
                     {
-                        doorAnimator.Play(openAnimationName);
-                        isOpen = true;
-                        LockedByDefault = false;
-                        print("door opened");
-                        RemoveItem();
+                        //doorAnimator.Play(openAnimationName);
+                        mainSwitch.ToggleAllLights();
+                        print("All lights have been turned on");
+                        if (!alreadyTakenFuse) { RemoveItem(); }
+                        alreadyTakenFuse = true;
                         hasCycled = true;
+                        OnByDefault = true;
                     }
                     else
                     {
-                        print("door locked aaaaaaaaaaa");
-                        print($"You need {requiredItemName} to open this door.");
+                        print($"You need {requiredItemName} to activate the fuse box.");
                     }
                 }
             }
