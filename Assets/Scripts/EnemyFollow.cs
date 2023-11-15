@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,7 @@ public class SC_NPCFollow : MonoBehaviour
     public NavMeshAgent agent;
     // Distance to maintain from the player
     public float stoppingDistance = 0.001f;
+    float distance;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +33,16 @@ public class SC_NPCFollow : MonoBehaviour
         Vector3 destinationPoint = transformToFollow.position - directionToPlayer.normalized * stoppingDistance;
         // Set the agent's destination to the calculated point
         agent.SetDestination(destinationPoint);
-        if (distance<=3)
+        if (distance<=2)
         {
             scriptInstance.attack_state = true;
+
         }
         else scriptInstance.attack_state = false;
+    }
+
+    public void Hurt(float dmg)
+    {
+        PlayerStats.Instance.TakeDamage(dmg);
     }
 }
