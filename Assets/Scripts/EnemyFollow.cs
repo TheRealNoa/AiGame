@@ -7,15 +7,21 @@ public class SC_NPCFollow : MonoBehaviour
     // Transform that NPC has to follow
     public Transform transformToFollow;
     public Animations scriptInstance;
+
     // NavMesh Agent variable
     public NavMeshAgent agent;
     // Distance to maintain from the player
     public float stoppingDistance = 0.001f;
+    public float hurtInterval = 3f;
+    public float attackDistance = 3f;
+    public float hurtAmmount = 1f;
+    bool canAttack = true;
     float distance;
 
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("CheckDistanceAndHurt", 0f, hurtInterval);
         agent = GetComponent<NavMeshAgent>();
         // Set stopping distance for the agent
         agent.stoppingDistance = stoppingDistance;
@@ -25,15 +31,15 @@ public class SC_NPCFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = agent.remainingDistance;
-        //stoppingDistance = 0.001f;
-        // Calculate the direction from NPC to player
+        
         Vector3 directionToPlayer = transformToFollow.position - transform.position;
         // Calculate the desired destination point with stopping distance
         Vector3 destinationPoint = transformToFollow.position - directionToPlayer.normalized * stoppingDistance;
-        // Set the agent's destination to the calculated point
+
         agent.SetDestination(destinationPoint);
-        if (distance<=2)
+        // Set the agent's destination to the calculated point
+        float distance = Vector3.Distance(transform.position, transformToFollow.position);
+        if (distance<=attackDistance)
         {
             scriptInstance.attack_state = true;
 
@@ -41,6 +47,43 @@ public class SC_NPCFollow : MonoBehaviour
         else scriptInstance.attack_state = false;
     }
 
+    private void CheckDistanceAndAttack()
+    {
+        // Calculate the distance between the enemy and the player
+        float distance = Vector3.Distance(transform.position, transformToFollow.position);
+
+        // Check if the player is within the attack distance
+        if (distance <= attackDistance && canAttack)
+        {
+            // Execute the Attack function
+            Hurt(hurtAmmount);
+
+            // Set canAttack to false to prevent repeated attacks within the interval
+            canAttack = false;
+
+            // Invoke a method to reset canAttack after the specified interval
+            Invoke("ResetAttack", hurtInterval);
+        }
+    }
+
+    private void CheckDistanceAndHurt()
+    {   
+        // Calculate the distance between the enemy and the player
+        distance = Vector3.Distance(transform.position, transformToFollow.position);
+        // Check if the player is within the attack distance
+        if (distance <= attackDistance)
+        {
+            Debug.Log(distance);
+            // Execute Hurt function
+            Hurt(hurtAmmount);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        // Reset canAttack to true after the attack interval has passed
+        canAttack = true;
+    }
     public void Hurt(float dmg)
     {
         PlayerStats.Instance.TakeDamage(dmg);

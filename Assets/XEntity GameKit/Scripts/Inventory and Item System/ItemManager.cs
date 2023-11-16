@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ;
 
 namespace XEntity.InventoryItemSystem
 {
@@ -9,6 +10,7 @@ namespace XEntity.InventoryItemSystem
 
     public class ItemManager : MonoBehaviour
     {
+        //PlayerStats playerstats;
         public InteractionSettings interactionSettings;
 
         //Singleton instance of this script.
@@ -18,9 +20,10 @@ namespace XEntity.InventoryItemSystem
         //Either assign the items manually when created or select the item scriptable object > right click > select Add To Item List 
         public List<Item> itemList = new List<Item>();
 
+        
         private void Awake()
         {
-            //Singleton logic
+            // Singleton logic
             #region Singleton
             if (Instance == null)
             {
@@ -34,16 +37,20 @@ namespace XEntity.InventoryItemSystem
             }
             #endregion
 
-            //Any code in awake should be after the singleton evaluation
+            // Get reference to PlayerStats
+            //playerstats = PlayerStats.Instance;
         }
 
         //This function is called when the Use Item button is clicked from one of the inventory items.
         public void UseItem(ItemSlot slot) 
         {
             if (slot.IsEmpty) return;
-            if (slot.slotItem.name=="Apple")
+            if (slot.slotItem.name=="RedHealth")
             {
                 print("APPLEE");
+
+                //PlayerStats.Instance.Heal(1);
+
             }
 
             //Add custom item functions ###################################################################################################
@@ -58,6 +65,8 @@ namespace XEntity.InventoryItemSystem
             }
         }
 
+
+        
         //ADD CUSTOM ITEM TYPE USE METHOD HERE.
         //The custom item use method should take ItemSlot as an argument if you are modifying the item in the slot.
         //Note: This item slot is the slot the item is being held at when the use method is called.
@@ -65,7 +74,9 @@ namespace XEntity.InventoryItemSystem
         private void ConsumeItem(ItemSlot slot) 
         {
             Debug.Log("You have consumed " + slot.slotItem.itemName);
+           // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
+            
         }
 
         public void useKey(ItemSlot slot)

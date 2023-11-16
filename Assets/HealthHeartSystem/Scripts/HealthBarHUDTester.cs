@@ -6,6 +6,17 @@ using UnityEngine;
 
 public class HealthBarHUDTester : MonoBehaviour
 {
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Hurt(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.J))
+        {
+            Heal(1);
+        }
+    }
     public void AddHealth()
     {
         PlayerStats.Instance.AddHealth();
