@@ -9,7 +9,9 @@ namespace XEntity.InventoryItemSystem
 
     public class ItemManager : MonoBehaviour
     {
-        public bool heal;
+        public bool healred;
+        public bool healgreen;
+        public bool healwhite;
         //PlayerStats playerstats;
         public InteractionSettings interactionSettings;
 
@@ -60,6 +62,9 @@ namespace XEntity.InventoryItemSystem
                 case ItemType.Placeable: PlaceItem(slot); break;
                 case ItemType.Consumeable: ConsumeItem(slot); break;
                 case ItemType.Door_key: useKey(slot); break;
+                case ItemType.RedMedKit: ConsumeRedMedKit(slot); break;
+                case ItemType.GreenMedKit: ConsumeGreenMedKit(slot); break;
+                case ItemType.WhiteMedKit: ConsumeWhiteMedKit(slot); break;
 
             }
         }
@@ -75,9 +80,35 @@ namespace XEntity.InventoryItemSystem
             Debug.Log("You have consumed " + slot.slotItem.itemName);
            // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
-            heal = true;
-            Debug.Log("Heal is true.");
             
+        }
+        private void ConsumeRedMedKit(ItemSlot slot)
+        {
+            Debug.Log("You have consumed " + slot.slotItem.itemName);
+            // PlayerStats.Instance.Heal(1);
+            slot.Remove(1);
+            healred = true;
+            Debug.Log("Heal is true.");
+
+        }
+
+        private void ConsumeGreenMedKit(ItemSlot slot)
+        {
+            Debug.Log("You have consumed " + slot.slotItem.itemName);
+            // PlayerStats.Instance.Heal(1);
+            slot.Remove(1);
+            healgreen = true;
+            Debug.Log("Heal is true.");
+
+        }
+        private void ConsumeWhiteMedKit(ItemSlot slot)
+        {
+            Debug.Log("You have consumed " + slot.slotItem.itemName);
+            // PlayerStats.Instance.Heal(1);
+            slot.Remove(1);
+            healwhite = true;
+            Debug.Log("Heal is true.");
+
         }
 
         public void useKey(ItemSlot slot)

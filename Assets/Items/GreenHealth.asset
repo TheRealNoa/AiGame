@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bb37a5e4810a7744a6b9d1f88712c1d, type: 3}
-  m_Name: RedHealth
+  m_Name: GreenHealth
   m_EditorClassIdentifier: 
-  type: 7
-  itemName: White Medkit
-  itemPerSlot: 30
-  icon: {fileID: 21300000, guid: 797374dd00efb2c498445cf9394fe889, type: 3}
-  prefab: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
+  type: 5
+  itemName: Green Medkit
+  itemPerSlot: 3
+  icon: {fileID: 21300000, guid: d66fcb73aa8035440bbd48dd8626948f, type: 3}
+  prefab: {fileID: 8198909352693198359, guid: 84ecf1efb046f604e8edf8818733b7fc, type: 3}
   itemInformation: 

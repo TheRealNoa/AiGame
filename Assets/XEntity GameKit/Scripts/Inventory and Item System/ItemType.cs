@@ -10,6 +10,9 @@ namespace XEntity.InventoryItemSystem
         ToolOrWeapon,
         Placeable,
         Consumeable,
-        Door_key
+        Door_key,
+        GreenMedKit,
+        WhiteMedKit,
+        RedMedKit
     }
 }

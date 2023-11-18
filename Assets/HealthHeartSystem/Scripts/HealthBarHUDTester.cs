@@ -19,11 +19,26 @@ public class HealthBarHUDTester : MonoBehaviour
         {
             Heal(1);
         }
-        if (itemManager != null && itemManager.heal)
+        if (itemManager != null)
         {
-            PlayerStats.Instance.Heal(1);
-            Debug.Log("Player healed.");
-            itemManager.heal = false;
+            if (itemManager.healred)
+            {
+                Debug.Log(itemManager.healred);
+                PlayerStats.Instance.Heal(1);
+                Debug.Log("Player healed red.");
+                itemManager.healred = false;
+
+            }else if (itemManager.healgreen) 
+            {
+                PlayerStats.Instance.Heal(3);
+                Debug.Log("Player healed green.");
+                itemManager.healgreen = false;
+            }else if(itemManager.healwhite) 
+            {
+                PlayerStats.Instance.Heal(2);
+                Debug.Log("Player healed white.");
+                itemManager.healwhite = false;
+            }
         }
     }
     void Start()
