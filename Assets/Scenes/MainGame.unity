@@ -4108,11 +4108,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 578376449398627443, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.74
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 578376449398627443, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.98
+      value: -0.952
       objectReference: {fileID: 0}
     - target: {fileID: 578376449398627443, guid: 6dc4cf4496348884d8ee27743ae38562, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6725,7 +6725,7 @@ MonoBehaviour:
   transformToFollow: {fileID: 785129901}
   scriptInstance: {fileID: 1188945319}
   agent: {fileID: 471687551}
-  stoppingDistance: 2
+  stoppingDistance: 1
   hurtInterval: 0.5
   attackDistance: 1.6
   hurtAmmount: 0.5
@@ -6833,7 +6833,7 @@ Transform:
   m_GameObject: {fileID: 471687549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.18, y: 1.46, z: 20.64}
+  m_LocalPosition: {x: -5.18, y: 1.46, z: 20.483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9624,7 +9624,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.81, y: 0.912, z: 8.59}
+  m_LocalPosition: {x: -5.42, y: 0.912, z: 8.96}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11271,8 +11271,8 @@ MonoBehaviour:
   interactionRange: 2
   openAnimationName: RightDoorOpenW
   closeAnimationName: RightDoorCloseW
-  LockedByDefault: 1
-  requiredItemName: Baby
+  LockedByDefault: 0
+  requiredItemName: 
 --- !u!95 &1073377708
 Animator:
   serializedVersion: 5
@@ -13060,7 +13060,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188945317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61f2b2f595cd11489ca0a61f4478e35, type: 3}
   m_Name: 
