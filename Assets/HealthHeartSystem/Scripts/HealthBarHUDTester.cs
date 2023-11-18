@@ -3,9 +3,12 @@
  */
 
 using UnityEngine;
+using XEntity.InventoryItemSystem;
 
 public class HealthBarHUDTester : MonoBehaviour
 {
+
+    public ItemManager itemManager;
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
@@ -16,6 +19,17 @@ public class HealthBarHUDTester : MonoBehaviour
         {
             Heal(1);
         }
+        if (itemManager != null && itemManager.heal)
+        {
+            PlayerStats.Instance.Heal(1);
+            Debug.Log("Player healed.");
+            itemManager.heal = false;
+        }
+    }
+    void Start()
+    {
+        // Find the ItemManager script in the scene
+        itemManager = FindObjectOfType<ItemManager>();
     }
     public void AddHealth()
     {

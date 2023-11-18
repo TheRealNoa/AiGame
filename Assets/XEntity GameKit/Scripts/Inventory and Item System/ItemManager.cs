@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using ;
 
 namespace XEntity.InventoryItemSystem
 {
@@ -10,6 +9,7 @@ namespace XEntity.InventoryItemSystem
 
     public class ItemManager : MonoBehaviour
     {
+        public bool heal;
         //PlayerStats playerstats;
         public InteractionSettings interactionSettings;
 
@@ -38,7 +38,6 @@ namespace XEntity.InventoryItemSystem
             #endregion
 
             // Get reference to PlayerStats
-            //playerstats = PlayerStats.Instance;
         }
 
         //This function is called when the Use Item button is clicked from one of the inventory items.
@@ -76,6 +75,8 @@ namespace XEntity.InventoryItemSystem
             Debug.Log("You have consumed " + slot.slotItem.itemName);
            // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
+            heal = true;
+            Debug.Log("Heal is true.");
             
         }
 

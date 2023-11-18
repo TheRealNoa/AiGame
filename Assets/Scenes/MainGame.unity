@@ -1157,30 +1157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   harvestItem: {fileID: 11400000, guid: 3fe54d817a955c347873942c4e46b833, type: 2}
---- !u!114 &65641920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65641914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf2586f5b209a045af9dff869aa39f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &65641921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65641914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8eec885079e01e47acacb3a92db9df2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &78009177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8068073526183931155, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -11321,6 +11297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf2586f5b209a045af9dff869aa39f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 0}
 --- !u!4 &1082983121
 Transform:
   m_ObjectHideFlags: 0
@@ -19782,12 +19759,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
       insertIndex: -1
       addedObject: {fileID: 65641915}
-    - targetCorrespondingSourceObject: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 65641920}
-    - targetCorrespondingSourceObject: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 65641921}
   m_SourcePrefab: {fileID: 100100000, guid: 360690a7c06559a4f927c76899139848, type: 3}
 --- !u!1001 &1909314473
 PrefabInstance:
