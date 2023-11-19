@@ -14,6 +14,7 @@ namespace XEntity.InventoryItemSystem
         GreenMedKit,
         WhiteMedKit,
         RedMedKit,
-        SingleBattery
+        SingleBattery,
+        DoubleBattery
     }
 }

@@ -22,10 +22,29 @@ public class Usage : MonoBehaviour
     {
         if (im.addBattery)
         {
-            bc._showingHP += 20;
-            Debug.Log("Added 20");
-            im.addBattery = false;
-            bc.used = true;
+            if ((bc._showingHP + 20) < 100)
+            {
+                bc._showingHP += 20;
+                Debug.Log("Added 20");
+                im.addBattery = false;
+                bc.used = true;
+            }
+            else { bc._showingHP = 100;
+                im.addBattery = false;
+            }
+        }
+        if (im.addTwoBatteries)
+        {
+            if ((bc._showingHP + 40) < 100)
+            {
+                bc._showingHP += 40;
+                Debug.Log("Added 40");
+                im.addTwoBatteries = false;
+                bc.used = true;
+            }
+            else { bc._showingHP = 100;
+                im.addTwoBatteries = false;
+            }
         }
     }
 }

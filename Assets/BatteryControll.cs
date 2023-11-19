@@ -6,7 +6,7 @@ using System.Security;
 
 public class BatteryControll : MonoBehaviour
 {
-    const float MAX_HP = 100f;
+    public const float MAX_HP = 100f;
 
     public float regularSpeed = 0.01f;
     public float specialSpeed = 0.2f;
