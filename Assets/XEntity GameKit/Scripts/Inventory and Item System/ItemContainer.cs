@@ -8,7 +8,7 @@ namespace XEntity.InventoryItemSystem
     public class ItemContainer : MonoBehaviour
     {
         public bool cameraMovement = true;
-
+        public ItemContainer Instance;
 
         [Header("Do NOT assign interactor on external containers.")]
         //The carrier is the interactor this ItemContainer is assigned to. For a player it is the general player inventory.

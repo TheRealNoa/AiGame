@@ -10130,9 +10130,10 @@ GameObject:
   - component: {fileID: 785129906}
   - component: {fileID: 785129905}
   - component: {fileID: 785129902}
-  - component: {fileID: 785129903}
   - component: {fileID: 785129907}
   - component: {fileID: 785129908}
+  - component: {fileID: 785129909}
+  - component: {fileID: 785129910}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -10244,21 +10245,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
   inventory: {fileID: 520824211}
---- !u!114 &785129903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785129895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 308e8f641bba1d5448099ada1cb32930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
-  xsensitivity: 30
-  ysensitivity: 30
 --- !u!114 &785129905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10327,6 +10313,35 @@ MonoBehaviour:
   gravity: -9.8
   speed: 5
   jumpHeight: 1
+--- !u!114 &785129909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785129895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a200fa4001dc24cb483542fa314bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 520824211}
+  pm: {fileID: 0}
+--- !u!114 &785129910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785129895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308e8f641bba1d5448099ada1cb32930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 963194227}
+  xsensitivity: 30
+  ysensitivity: 30
 --- !u!1001 &805220118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14989,11 +15004,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8060343720380838848, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
       propertyPath: m_Name
-      value: Player Inventory
+      value: PlayerInventory
       objectReference: {fileID: 0}
     - target: {fileID: 8060343720380838848, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
       propertyPath: m_TagString
       value: PlayerInv
+      objectReference: {fileID: 0}
+    - target: {fileID: 8060343720380838854, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
+      propertyPath: UIToggleKey
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8060343720380838854, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
       propertyPath: containerTitle
@@ -15003,6 +15022,10 @@ PrefabInstance:
       propertyPath: containerInteractor
       value: 
       objectReference: {fileID: 785129902}
+    - target: {fileID: 8060343720380838854, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
+      propertyPath: customOptionsMenuConfig.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8060343720380838855, guid: 2ab7f5bcdd8f953458d26c6efa7f2871, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
