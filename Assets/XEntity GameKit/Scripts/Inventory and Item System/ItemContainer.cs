@@ -7,6 +7,9 @@ namespace XEntity.InventoryItemSystem
     //This script is attached to the UI representation of the item container. An example item container UI prefab is provided with the asset.
     public class ItemContainer : MonoBehaviour
     {
+        public bool cameraMovement = true;
+
+
         [Header("Do NOT assign interactor on external containers.")]
         //The carrier is the interactor this ItemContainer is assigned to. For a player it is the general player inventory.
         public Interactor containerInteractor;
@@ -37,7 +40,10 @@ namespace XEntity.InventoryItemSystem
 
 
 
-
+        private void Start()
+        {
+            cameraMovement = true;
+        }
         private List<SlotOptionButtonInfo> slotOptionButtonInfoList;
 
         protected virtual void OnEnable() 
@@ -305,12 +311,14 @@ namespace XEntity.InventoryItemSystem
             if (mainContainerUI.gameObject.activeSelf && isContainerUIOpen)
             {
                 isContainerUIOpen = false;
-                StartCoroutine(Utils.TweenScaleOut(mainContainerUI.gameObject, 50, false));
+                StartCoroutine(Utils.TweenScaleOut(mainContainerUI.gameObject, 5, false));
+                cameraMovement = true;
             }
             else if(!mainContainerUI.gameObject.activeSelf && !isContainerUIOpen)
             {
                 isContainerUIOpen = true;
-                StartCoroutine(Utils.TweenScaleIn(mainContainerUI.gameObject, 50, Vector3.one));
+                StartCoroutine(Utils.TweenScaleIn(mainContainerUI.gameObject, 5, Vector3.one));
+                cameraMovement = false;
             }
         }
 
