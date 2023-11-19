@@ -26,6 +26,14 @@ public class FlashlightToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isOn && !specialIsOn)
+        {
+            batteryControll.regular();
+        }else if(isOn && specialIsOn) 
+        {
+            batteryControll.special();
+        }
+        
         float value = batteryControll._showingHP;
         if(value <= 0)
         {
@@ -35,6 +43,7 @@ public class FlashlightToggle : MonoBehaviour
                 lightGO.SetActive(false);
             }
         }
+     
         //toggle flashlight on key down
         //if (Input.GetMouseButtonDown(1)) FOR SPECIAL ATTACK
         if (Input.GetKeyDown(KeyCode.X))

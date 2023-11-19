@@ -13,6 +13,7 @@ namespace XEntity.InventoryItemSystem
         Door_key,
         GreenMedKit,
         WhiteMedKit,
-        RedMedKit
+        RedMedKit,
+        SingleBattery
     }
 }

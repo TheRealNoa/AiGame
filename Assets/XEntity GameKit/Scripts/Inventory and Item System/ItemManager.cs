@@ -12,6 +12,7 @@ namespace XEntity.InventoryItemSystem
         public bool healred;
         public bool healgreen;
         public bool healwhite;
+        public bool addBattery;
         //PlayerStats playerstats;
         public InteractionSettings interactionSettings;
 
@@ -65,6 +66,7 @@ namespace XEntity.InventoryItemSystem
                 case ItemType.RedMedKit: ConsumeRedMedKit(slot); break;
                 case ItemType.GreenMedKit: ConsumeGreenMedKit(slot); break;
                 case ItemType.WhiteMedKit: ConsumeWhiteMedKit(slot); break;
+                case ItemType.SingleBattery: UseBattery(slot);break;
 
             }
         }
@@ -88,6 +90,16 @@ namespace XEntity.InventoryItemSystem
             // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
             healred = true;
+            Debug.Log("Heal is true.");
+
+        }
+
+        private void UseBattery(ItemSlot slot)
+        {
+            Debug.Log("You have consumed " + slot.slotItem.itemName);
+            // PlayerStats.Instance.Heal(1);
+            slot.Remove(1);
+            addBattery = true;
             Debug.Log("Heal is true.");
 
         }
