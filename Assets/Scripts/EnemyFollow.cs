@@ -46,25 +46,6 @@ public class SC_NPCFollow : MonoBehaviour
         else scriptInstance.attack_state = false;
     }
 
-    private void CheckDistanceAndAttack()
-    {
-        // Calculate the distance between the enemy and the player
-        float distance = Vector3.Distance(transform.position, transformToFollow.position);
-
-        // Check if the player is within the attack distance
-        if (distance <= attackDistance && canAttack)
-        {
-            // Execute the Attack function
-            Hurt(hurtAmmount);
-
-            // Set canAttack to false to prevent repeated attacks within the interval
-            canAttack = false;
-
-            // Invoke a method to reset canAttack after the specified interval
-            Invoke("ResetAttack", hurtInterval);
-        }
-    }
-
     private void CheckDistanceAndHurt()
     {   
         // Calculate the distance between the enemy and the player
@@ -76,12 +57,6 @@ public class SC_NPCFollow : MonoBehaviour
             // Execute Hurt function
             Hurt(hurtAmmount);
         }
-    }
-
-    private void ResetAttack()
-    {
-        // Reset canAttack to true after the attack interval has passed
-        canAttack = true;
     }
     public void Hurt(float dmg)
     {

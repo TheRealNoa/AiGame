@@ -25,7 +25,7 @@ public class RayCastDetection : MonoBehaviour
                 isLooking = true;
                 if (ft.specialIsOn) { isSpecial = true; }
                 else isSpecial = false;
-                Debug.Log("Player is looking at " + gameObject.name);
+                //Debug.Log("Player is looking at " + gameObject.name);
             }
         }
         else

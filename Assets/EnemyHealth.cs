@@ -50,12 +50,12 @@ public class EnemyHealth : MonoBehaviour
     {
        
 
-        if (rcd.isLooking)
+        if (rcd.isLooking && rcd.isSpecial)
         {
-            enemyHP -= 1;
+            enemyHP -= 0.1f;
         }
-        else
-            Debug.Log("Nothing is happening");
+        //else
+            //Debug.Log("Nothing is happening");
 
 
     }
