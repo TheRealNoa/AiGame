@@ -7006,11 +7006,11 @@ MonoBehaviour:
   transformToFollow: {fileID: 785129901}
   scriptInstance: {fileID: 1188945319}
   agent: {fileID: 471687551}
-  stoppingDistance: 1
+  stoppingDistance: 0.7
   hurtInterval: 0.5
-  attackDistance: 1.6
+  attackDistance: 2.6
   hurtAmmount: 0.5
-  enemySpeed: 5
+  enemySpeed: 3
 --- !u!195 &471687551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7148,6 +7148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 0
+  FlashlightDamage: 2
   _enemyBar: {fileID: 339605199}
   _showingHPBar: {fileID: 485203630}
 --- !u!114 &471687558
@@ -10334,7 +10335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   regularSpeed: 0.01
-  specialSpeed: 0.2
+  specialSpeed: 0.01
   used: 0
   _showingHP: 50
   _showingHPBar: {fileID: 670268376}
@@ -13896,7 +13897,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188945317}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61f2b2f595cd11489ca0a61f4478e35, type: 3}
   m_Name: 
@@ -13904,6 +13905,10 @@ MonoBehaviour:
   idle: Z_Idle
   attack: Z_Attack
   attack_state: 0
+  attacked: 0
+  AttackToIdle_state: 0
+  specialFallBack: 0
+  specialFallBackToIdle: 0
 --- !u!1 &1191162011
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ public class SC_NPCFollow : MonoBehaviour
     bool canAttack = true;
     float distance;
 
+    FlashlightToggle flashlight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,10 @@ public class SC_NPCFollow : MonoBehaviour
         agent.stoppingDistance = stoppingDistance;
         // Set the initial speed of the agent
         agent.speed = enemySpeed;
+        GameObject enemyan = GameObject.Find("Zombie1");
+        scriptInstance = enemyan.GetComponent<Animations>();
+        GameObject flscript = GameObject.Find("Flashlight");
+        flashlight = flscript.GetComponent<FlashlightToggle>();
     }
 
     // Update is called once per frame
@@ -40,7 +46,7 @@ public class SC_NPCFollow : MonoBehaviour
         agent.SetDestination(destinationPoint);
         // Set the agent's destination to the calculated point
         float distance = Vector3.Distance(transform.position, transformToFollow.position);
-        if (distance <= attackDistance)
+            if (distance <= attackDistance)
         {
             scriptInstance.attack_state = true;
         }
@@ -56,8 +62,9 @@ public class SC_NPCFollow : MonoBehaviour
         {
             //Debug.Log(distance);
             // Execute Hurt function
+            scriptInstance.attack_state = true;
             Hurt(hurtAmmount);
-        }
+        }else scriptInstance.attack_state = false;
     }
 
     public void Hurt(float dmg)
