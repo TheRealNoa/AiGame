@@ -10,8 +10,8 @@ public class SC_NPCFollow : MonoBehaviour
     public NavMeshAgent agent;
 
     // State Parameters
-    private enum State { Patrol, Chase, Flee }
-    private State currentState = State.Patrol;
+    public enum State { Patrol, Chase, Flee }
+    public State currentState = State.Patrol;
 
     // Patrol State Parameters
     public float patrolWaitTime = 2f;
@@ -238,5 +238,9 @@ public class SC_NPCFollow : MonoBehaviour
         }
 
         return transform.position; // Fallback to current position if no point found
+    }
+    public State GetCurrentState()
+    {
+        return currentState;
     }
 }

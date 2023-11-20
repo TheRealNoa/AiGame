@@ -15,11 +15,14 @@ public class Animations : MonoBehaviour
     public bool specialFallBackToIdle;
     // Start is called before the first frame update
     FlashlightToggle flashlight;
+    SC_NPCFollow enemyFollow;
     void Start()
     {
         anim = GetComponent<Animator>();
         GameObject flscript = GameObject.Find("Flashlight");
         flashlight = flscript.GetComponent<FlashlightToggle>();
+        GameObject enemy = GameObject.Find("Enemy");
+        enemyFollow = enemy.GetComponent<SC_NPCFollow>();
     }
 
     // Update is called once per frame
@@ -35,20 +38,6 @@ public class Animations : MonoBehaviour
             attacked = true;
 
         }
-        else if (attacked && !attack_state && !flashlight.specialIsOn)
-        {
-            anim.SetBool("Attack", false);
-            anim.SetBool("AttackToIdle", true);
-            AttackToIdle_state = true;
-            attacked = false;
-        }
-        else if (flashlight.specialIsOn)
-        {
-            anim.SetBool("Attack", false);
-            anim.SetBool("FallingBack", true);
-            specialFallBack = false;
-            specialFallBackToIdle = false;
-        } 
     }
     public void setAttackState(bool state)
     {
