@@ -7010,6 +7010,7 @@ MonoBehaviour:
   hurtInterval: 0.5
   attackDistance: 1.6
   hurtAmmount: 0.5
+  enemySpeed: 5
 --- !u!195 &471687551
 NavMeshAgent:
   m_ObjectHideFlags: 0

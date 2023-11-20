@@ -15,6 +15,7 @@ public class SC_NPCFollow : MonoBehaviour
     public float hurtInterval = 3f;
     public float attackDistance = 3f;
     public float hurtAmmount = 1f;
+    public float enemySpeed = 3f; // Add this line for speed control
     bool canAttack = true;
     float distance;
 
@@ -25,12 +26,13 @@ public class SC_NPCFollow : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // Set stopping distance for the agent
         agent.stoppingDistance = stoppingDistance;
+        // Set the initial speed of the agent
+        agent.speed = enemySpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         Vector3 directionToPlayer = transformToFollow.position - transform.position;
         // Calculate the desired destination point with stopping distance
         Vector3 destinationPoint = transformToFollow.position - directionToPlayer.normalized * stoppingDistance;
@@ -38,16 +40,15 @@ public class SC_NPCFollow : MonoBehaviour
         agent.SetDestination(destinationPoint);
         // Set the agent's destination to the calculated point
         float distance = Vector3.Distance(transform.position, transformToFollow.position);
-        if (distance<=attackDistance)
+        if (distance <= attackDistance)
         {
             scriptInstance.attack_state = true;
-
         }
         else scriptInstance.attack_state = false;
     }
 
     private void CheckDistanceAndHurt()
-    {   
+    {
         // Calculate the distance between the enemy and the player
         distance = Vector3.Distance(transform.position, transformToFollow.position);
         // Check if the player is within the attack distance
@@ -58,6 +59,7 @@ public class SC_NPCFollow : MonoBehaviour
             Hurt(hurtAmmount);
         }
     }
+
     public void Hurt(float dmg)
     {
         PlayerStats.Instance.TakeDamage(dmg);
