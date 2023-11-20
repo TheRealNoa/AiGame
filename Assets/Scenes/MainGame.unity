@@ -7014,8 +7014,8 @@ MonoBehaviour:
   hurtInterval: 0.5
   attackDistance: 2.6
   hurtAmount: 1
-  patrolSpeed: 1.5
-  chaseSpeed: 2.5
+  patrolSpeed: 3
+  chaseSpeed: 5
   fleeSpeed: 5
 --- !u!195 &471687551
 NavMeshAgent:
