@@ -27,6 +27,7 @@ public class Animations : MonoBehaviour
     public bool chased;
     public bool fled;
     public bool damaged;
+    public bool patrolled;
 
     void Start()
     {
@@ -56,12 +57,14 @@ public class Animations : MonoBehaviour
             anim.SetBool("RunToWalk", false);
             anim.SetBool("RunToAttack", false);
             anim.SetBool("IdleToWalk", false);
+            anim.SetBool("AttackToRun", false);
             anim.SetBool("WalkToRun", true);
             if (damaged)
             {
                 anim.SetBool("RunToAttack", false);
                 anim.SetBool("WalkToRun", false);
                 anim.SetBool("AttackToRun", true);
+                damaged = false;
             }
 
             fled = true;
@@ -73,18 +76,30 @@ public class Animations : MonoBehaviour
                 anim.SetBool("RunToAttack", false);
                 anim.SetBool("IdleToWalk", false);
                 anim.SetBool("RunToWalk", false);
+                anim.SetBool("WalkToAttack", false);
                 anim.SetBool("WalkToRun", true);
             }else
-            if(agent.remainingDistance <= enemyFollow.attackDistance)
+            if(agent.remainingDistance <= enemyFollow.attackDistance && patrolled)
             {
                 anim.SetBool("AttackToRun", false);
                 anim.SetBool("WalkToRun", false);
+                anim.SetBool("WalkToAttack", false);
                 anim.SetBool("RunToAttack", true);
                 damaged = true;
             }else
+            if (agent.remainingDistance <= enemyFollow.attackDistance && !patrolled) 
+            {
+                anim.SetBool("AttackToRun", false);
+                anim.SetBool("WalkToRun", false);
+                anim.SetBool("WalkToAttack", true);
+                damaged = true;
+
+            }
+            else
                 if (agent.remainingDistance > enemyFollow.attackDistance && damaged)
                 {
                     anim.SetBool("RunToAttack", false);
+                    anim.SetBool("WalkToAttack", false);
                     anim.SetBool("IdleToWalk", false);
                     anim.SetBool("RunToWalk", false);
                     anim.SetBool("AttackToRun", true);
@@ -99,17 +114,21 @@ public class Animations : MonoBehaviour
                 anim.SetBool("RunToAttack", false);
                 anim.SetBool("WalkToRun", false);
                 anim.SetBool("IdleToWalk", true);
+                patrolled = true;
             }
             else if(fled)
             {
                 anim.SetBool("RunToAttack", false);
                 anim.SetBool("WalkToRun", false);
                 anim.SetBool("RunToWalk", true);
-            }else if (damaged) 
+                patrolled = true;
+            }
+            else if (damaged) 
             {
                 anim.SetBool("IdleToWalk", false);
                 anim.SetBool("RunToWalk", false);
                 anim.SetBool("AttackToWalk", true);
+                patrolled = true;
             }
 
         }
