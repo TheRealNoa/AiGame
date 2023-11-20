@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     const float MAX_HP = 100f;
     float _enemyHP;
     public float enemyHealth;
+    public float FlashlightDamage;
 
     RayCastDetection rcd;
 
@@ -41,23 +42,33 @@ public class EnemyHealth : MonoBehaviour
         enemyHP = MAX_HP;
         GameObject rd = GameObject.Find("Enemy");
         rcd = rd.GetComponent<RayCastDetection>();
-       
+        StartCoroutine(HurtEnemyRepeatedly());
+
 
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator HurtEnemyRepeatedly()
     {
-       
-
-        if (rcd.isLooking && rcd.isSpecial)
+        while (true)
         {
-            enemyHP -= 0.1f;
+            // Check condition (rcd.isLooking && rcd.isSpecial)
+            if (rcd.isLooking && rcd.isSpecial)
+            {
+                // Hurt the enemy
+                HurtEnemy(FlashlightDamage);
+                Debug.Log("Enemy was hurt");
+            }
+
+            // Wait for 0.2 seconds before the next check
+            yield return new WaitForSeconds(0.5f);
         }
-        //else
-            //Debug.Log("Nothing is happening");
-
-
     }
+
+    void HurtEnemy(float damage)
+    {
+        // Your logic to hurt the enemy
+        enemyHP -= damage;
+    }
+    // Update is called once per frame
 
 }

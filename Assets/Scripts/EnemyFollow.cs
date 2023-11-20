@@ -54,7 +54,7 @@ public class SC_NPCFollow : MonoBehaviour
         // Check if the player is within the attack distance
         if (distance <= attackDistance)
         {
-            Debug.Log(distance);
+            //Debug.Log(distance);
             // Execute Hurt function
             Hurt(hurtAmmount);
         }
