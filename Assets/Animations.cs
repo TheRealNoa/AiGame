@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Animations : MonoBehaviour
 {
@@ -10,12 +11,23 @@ public class Animations : MonoBehaviour
     public string attack;
     public bool attack_state;
     public bool attacked;
-    public bool AttackToIdle_state;
-    public bool specialFallBack;
-    public bool specialFallBackToIdle;
+    public bool ranAway;
     // Start is called before the first frame update
     FlashlightToggle flashlight;
     SC_NPCFollow enemyFollow;
+    SC_NPCFollow.State currentState;
+    SC_NPCFollow.State fleeState;
+    SC_NPCFollow.State chaseState;
+    SC_NPCFollow.State patrolState;
+
+    public NavMeshAgent agent;
+
+
+
+    public bool chased;
+    public bool fled;
+    public bool damaged;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -23,21 +35,86 @@ public class Animations : MonoBehaviour
         flashlight = flscript.GetComponent<FlashlightToggle>();
         GameObject enemy = GameObject.Find("Enemy");
         enemyFollow = enemy.GetComponent<SC_NPCFollow>();
+
+        agent = enemy.GetComponent<NavMeshAgent>();
+
+        //SC_NPCFollow.State currentState = enemyFollow.GetCurrentState();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (attack_state && !flashlight.specialIsOn)
+        SC_NPCFollow.State fleeState = SC_NPCFollow.State.Flee;
+        SC_NPCFollow.State chaseState = SC_NPCFollow.State.Chase;
+        SC_NPCFollow.State patrolState = SC_NPCFollow.State.Patrol;
+
+
+        SC_NPCFollow.State currentState = enemyFollow.GetCurrentState();
+        if (currentState == fleeState)
         {
-            anim.SetBool("FallingBack", false);
-            anim.SetBool("Attack", true);
-            anim.SetBool("AttackToIdle", false);
-            AttackToIdle_state = false;
-            attacked = true;
+            anim.SetBool("RunToWalk", false);
+            anim.SetBool("RunToAttack", false);
+            anim.SetBool("IdleToWalk", false);
+            anim.SetBool("WalkToRun", true);
+            if (damaged)
+            {
+                anim.SetBool("RunToAttack", false);
+                anim.SetBool("WalkToRun", false);
+                anim.SetBool("AttackToRun", true);
+            }
+
+            fled = true;
+        }
+        if(currentState == chaseState)
+        {
+            if (agent.remainingDistance > enemyFollow.attackDistance && !damaged)
+            {
+                anim.SetBool("RunToAttack", false);
+                anim.SetBool("IdleToWalk", false);
+                anim.SetBool("RunToWalk", false);
+                anim.SetBool("WalkToRun", true);
+            }else
+            if(agent.remainingDistance <= enemyFollow.attackDistance)
+            {
+                anim.SetBool("AttackToRun", false);
+                anim.SetBool("WalkToRun", false);
+                anim.SetBool("RunToAttack", true);
+                damaged = true;
+            }else
+                if (agent.remainingDistance > enemyFollow.attackDistance && damaged)
+                {
+                    anim.SetBool("RunToAttack", false);
+                    anim.SetBool("IdleToWalk", false);
+                    anim.SetBool("RunToWalk", false);
+                    anim.SetBool("AttackToRun", true);
+                    damaged = false;
+                }
 
         }
+        else if(currentState == patrolState)
+        {
+            if (!fled)
+            {
+                anim.SetBool("RunToAttack", false);
+                anim.SetBool("WalkToRun", false);
+                anim.SetBool("IdleToWalk", true);
+            }
+            else if(fled)
+            {
+                anim.SetBool("RunToAttack", false);
+                anim.SetBool("WalkToRun", false);
+                anim.SetBool("RunToWalk", true);
+            }else if (damaged) 
+            {
+                anim.SetBool("IdleToWalk", false);
+                anim.SetBool("RunToWalk", false);
+                anim.SetBool("AttackToWalk", true);
+            }
+
+        }
+            
+        
     }
     public void setAttackState(bool state)
     {
