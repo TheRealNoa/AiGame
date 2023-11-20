@@ -9,6 +9,9 @@ public class EnemyHealth : MonoBehaviour
     const float MAX_HP = 100f;
     float _enemyHP;
     public float enemyHealth;
+
+    RayCastDetection rcd;
+
     float enemyHP {
         get => _enemyHP; set {
             _enemyHP = value;
@@ -36,21 +39,25 @@ public class EnemyHealth : MonoBehaviour
         _showingHPBar.Initialize(MAX_HP);
         showingHP = MAX_HP;
         enemyHP = MAX_HP;
+        GameObject rd = GameObject.Find("Enemy");
+        rcd = rd.GetComponent<RayCastDetection>();
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.UpArrow))
+       
+
+        if (rcd.isLooking)
         {
-            Debug.Log("up pressed");
-            enemyHP += 10;
-            showingHP += 10;
-        }else if(Input.GetKeyUp(KeyCode.DownArrow)) 
-        { enemyHP -= 10;
-            showingHP -= 10;
+            enemyHP -= 1;
         }
+        else
+            Debug.Log("Nothing is happening");
+
 
     }
+
 }

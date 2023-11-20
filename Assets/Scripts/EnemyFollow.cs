@@ -11,7 +11,7 @@ public class SC_NPCFollow : MonoBehaviour
     // NavMesh Agent variable
     public NavMeshAgent agent;
     // Distance to maintain from the player
-    public float stoppingDistance = 0.001f;
+    public float stoppingDistance;
     public float hurtInterval = 3f;
     public float attackDistance = 3f;
     public float hurtAmmount = 1f;
@@ -25,7 +25,6 @@ public class SC_NPCFollow : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // Set stopping distance for the agent
         agent.stoppingDistance = stoppingDistance;
-        stoppingDistance = 0.001f;
     }
 
     // Update is called once per frame

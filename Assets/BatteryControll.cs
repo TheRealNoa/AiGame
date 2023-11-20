@@ -7,6 +7,7 @@ using System.Security;
 public class BatteryControll : MonoBehaviour
 {
     public const float MAX_HP = 100f;
+    public const float MIN_XP = 0f;
 
     public float regularSpeed = 0.01f;
     public float specialSpeed = 0.2f;
@@ -36,6 +37,10 @@ public class BatteryControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_showingHP < 0) 
+        {
+            _showingHP = MIN_XP;
+        }
         if (used)
         {
             showingHP = showingHP;
@@ -54,10 +59,15 @@ public class BatteryControll : MonoBehaviour
     }
     public void regular()
     {
-        showingHP -= regularSpeed;
+        if (showingHP > MIN_XP)
+        { showingHP -= regularSpeed; }
+        else showingHP = MIN_XP;
     }
     public void special()
     {
-        showingHP -= specialSpeed;
+        if (showingHP > MIN_XP)
+        {
+            showingHP -= specialSpeed;
+        }else showingHP = MIN_XP;
     }
 }

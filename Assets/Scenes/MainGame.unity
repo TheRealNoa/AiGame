@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.42
+  m_AmbientIntensity: 2.92
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.339
+  m_ReflectionIntensity: 0.082
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1610177281}
-  m_IndirectSpecularColor: {r: 0.21778151, g: 0.22263706, b: 0.20861137, a: 0.339}
+  m_IndirectSpecularColor: {r: 0.09600366, g: 0.09869156, b: 0.090927355, a: 0.082}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1051,50 +1051,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 567147022187255751, guid: 8809bf6169090444b94e702fbc61c496, type: 3}
   m_PrefabInstance: {fileID: 1761235591}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &50405373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 50405375}
-  - component: {fileID: 50405374}
-  m_Layer: 0
-  m_Name: MainLightSwitch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &50405374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50405373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26a85ea76337c04a8d6915499d63b96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &50405375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50405373}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.920544, y: -15.397608, z: 14.22814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &57854503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7027,6 +6983,7 @@ GameObject:
   - component: {fileID: 471687550}
   - component: {fileID: 471687556}
   - component: {fileID: 471687557}
+  - component: {fileID: 471687558}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -7157,7 +7114,7 @@ Transform:
   m_GameObject: {fileID: 471687549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.18, y: 1.46, z: 20.483}
+  m_LocalPosition: {x: -5.18, y: -16.4, z: 8.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7192,6 +7149,21 @@ MonoBehaviour:
   enemyHealth: 0
   _enemyBar: {fileID: 339605199}
   _showingHPBar: {fileID: 485203630}
+--- !u!114 &471687558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471687549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddd252499a03ee488679e9631709204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 4
+  isLooking: 0
+  isSpecial: 0
 --- !u!1 &472641143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4282848018816662437, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -10229,7 +10201,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78, y: 0.912, z: 7.56}
+  m_LocalPosition: {x: -2.36, y: -16.83, z: 7.56}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23790,7 +23762,6 @@ SceneRoots:
   - {fileID: 1377706909}
   - {fileID: 2074215108}
   - {fileID: 1177569434}
-  - {fileID: 50405375}
   - {fileID: 94090297}
   - {fileID: 1465061024}
   - {fileID: 1082983121}

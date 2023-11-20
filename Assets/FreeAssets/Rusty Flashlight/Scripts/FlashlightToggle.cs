@@ -8,7 +8,7 @@ public class FlashlightToggle : MonoBehaviour
 {
     public GameObject lightGO; //light gameObject to work with
     private bool isOn = false; //is flashlight on or off?
-    private bool specialIsOn = false;
+    public bool specialIsOn = false;
 
     public BatteryControll batteryControll;
     
