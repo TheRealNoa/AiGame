@@ -6984,6 +6984,7 @@ GameObject:
   - component: {fileID: 471687556}
   - component: {fileID: 471687557}
   - component: {fileID: 471687558}
+  - component: {fileID: 471687559}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -7006,11 +7007,15 @@ MonoBehaviour:
   transformToFollow: {fileID: 785129901}
   scriptInstance: {fileID: 1188945319}
   agent: {fileID: 471687551}
+  patrolWaitTime: 2
+  chaseDuration: 30
   stoppingDistance: 0.7
   hurtInterval: 0.5
   attackDistance: 2.6
-  hurtAmmount: 0.5
-  enemySpeed: 3
+  hurtAmount: 1
+  patrolSpeed: 1.5
+  chaseSpeed: 2.5
+  fleeSpeed: 5
 --- !u!195 &471687551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7115,7 +7120,7 @@ Transform:
   m_GameObject: {fileID: 471687549}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.18, y: -16.4, z: 8.16}
+  m_LocalPosition: {x: -5.18, y: 1.46, z: 18.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7166,6 +7171,19 @@ MonoBehaviour:
   raycastDistance: 4
   isLooking: 0
   isSpecial: 0
+--- !u!114 &471687559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471687549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed077a10b6f85bc4185e2af3e6ea747b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorInteractionRange: 0.75
 --- !u!1 &472641143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4282848018816662437, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -10203,7 +10221,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.36, y: -16.83, z: 7.56}
+  m_LocalPosition: {x: -5.27, y: 1.05, z: 6.71}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:

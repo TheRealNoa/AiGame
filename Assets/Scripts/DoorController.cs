@@ -1,4 +1,7 @@
 using UnityEngine;
+using XEntity.InventoryItemSystem;
+
+using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using XEntity.InventoryItemSystem;
 
@@ -58,6 +61,20 @@ public class DoorController : MonoBehaviour
         {
             TryInteractWithDoor();
         }
+    }
+    public void TryOpenDoor()
+    {
+        if (!isOpen)
+        {
+            doorAnimator.Play(openAnimationName);
+            isOpen = true;
+            Debug.Log("Door opened by enemy");
+        }
+    }
+
+    public bool IsOpen
+    {
+        get { return isOpen; }
     }
 
     private void RemoveItem()
@@ -121,7 +138,7 @@ public class DoorController : MonoBehaviour
                     else
                     {
                         // Check if the required item is in the player's inventory
-                        if (requiredItemName=="" || hasCycled || (!LockedByDefault))
+                        if (requiredItemName == "" || hasCycled || (!LockedByDefault))
                         {
                             doorAnimator.Play(openAnimationName);
                             isOpen = true;
