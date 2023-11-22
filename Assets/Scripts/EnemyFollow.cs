@@ -10,8 +10,8 @@ public class SC_NPCFollow : MonoBehaviour
     public NavMeshAgent agent;
 
     // State Parameters
-    public enum State { Patrol, Chase, Flee }
-    public State currentState = State.Patrol;
+    public enum State { NotSpawned, Patrol, Chase, Flee }
+    public State currentState = State.NotSpawned;
 
     // Patrol State Parameters
     public float patrolWaitTime = 2f;
@@ -20,6 +20,10 @@ public class SC_NPCFollow : MonoBehaviour
     // Chase State Parameters
     public float chaseDuration = 30f;
     private float chaseTimer = 0f;
+
+    // Fleeing paramaters
+    private bool isFleeingDueToFlashlight = false;
+    private bool isPausedByFlashlight = false;
 
     // Attack Parameters
     public float stoppingDistance = 0.001f;
@@ -36,24 +40,67 @@ public class SC_NPCFollow : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = stoppingDistance;
-        StartCoroutine(InitializePatrol());
+        ToggleVisibilityAndInteractivity(false); // Make invisible and non-interactive
+        StartCoroutine(NotSpawned());
     }
 
-    IEnumerator InitializePatrol()
+    IEnumerator NotSpawned()
     {
-        Debug.Log("Initializing Patrol");
+        Debug.Log("Not Spawned");
+        ToggleVisibilityAndInteractivity(false);
+
+        // Wait for 10 seconds
         yield return new WaitForSeconds(10);
+
+        // Spawn at a random NavMesh point and switch to Patrol state
+        Debug.Log("Spawning");
+        ToggleVisibilityAndInteractivity(true);
+        Vector3 randomPoint = GetRandomPointOnNavMesh(20);
+        transform.position = randomPoint; // Teleport to the random point
         currentState = State.Patrol;
-        Debug.Log("Patrol Initialized");
-        Patrol();
+    }
+
+    void ToggleVisibilityAndInteractivity(bool isActive)
+    {
+        // Find and toggle the child GameObject - "Zombie1"
+        Transform zombie1Child = transform.Find("Zombie1");
+        if (zombie1Child != null)
+        {
+            zombie1Child.gameObject.SetActive(isActive);
+        }
+
+        // If isActive is false, disable the agent and collider to make the parent non-interactive
+        if (!isActive)
+        {
+          zombie1Child.gameObject.SetActive(isActive);
+        }
     }
 
     void Update()
     {
-
-        switch (currentState)
+        if (Input.GetKeyDown(KeyCode.Alpha1)) // Press '1' for NotSpawned
         {
+            currentState = State.NotSpawned;
+            StartCoroutine(NotSpawned());
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) // Press '2' for Patrol
+        {
+            currentState = State.Patrol;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) // Press '3' for Chase
+        {
+            currentState = State.Chase;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4)) // Press '4' for Flee
+        {
+            currentState = State.Flee;
+        }
+
+            switch (currentState)
+        {
+            case State.NotSpawned:
+                NotSpawned();
+                break;
             case State.Patrol:
                 agent.speed = patrolSpeed;
                 CheckForPlayer();
@@ -123,9 +170,9 @@ public class SC_NPCFollow : MonoBehaviour
 
     void Flee()
     {
+        Debug.Log("Fleeing");
         if (!IsFleePointSet)
         {
-            Debug.Log("Fleeing");
             Vector3 fleeDirection = (transform.position - transformToFollow.position).normalized;
             Vector3 fleePoint = transform.position + fleeDirection * 40;
 
@@ -142,7 +189,8 @@ public class SC_NPCFollow : MonoBehaviour
         {
             if (!IsInPlayerView())
             {
-                currentState = State.Patrol;
+                Debug.Log("Patrol or despawn triggered");
+                currentState = Random.Range(0, 2) == 0 ? State.Patrol : State.NotSpawned;
                 IsFleePointSet = false;
             }
         }
@@ -215,32 +263,34 @@ public class SC_NPCFollow : MonoBehaviour
         return finalPosition;
     }
 
-    Vector3 GetRandomPointNotInViewOfPlayer()
-    {
-        const int maxAttempts = 10;
-        const float playerFieldOfView = 110f; // Player's field of view angle
-
-        for (int i = 0; i < maxAttempts; i++)
-        {
-            Vector3 randomPoint = GetRandomPointOnNavMesh(40); // Adjust range as needed
-            Vector3 directionToPlayer = transformToFollow.position - randomPoint;
-
-            // Check if the point is behind the player or outside their field of view
-            float angle = Vector3.Angle(transformToFollow.forward, directionToPlayer);
-            if (angle > playerFieldOfView / 2)
-            {
-                // Check if there are any obstacles blocking the line of sight to this point
-                if (!Physics.Linecast(transformToFollow.position, randomPoint))
-                {
-                    return randomPoint; // Point is likely not in the player's view
-                }
-            }
-        }
-
-        return transform.position; // Fallback to current position if no point found
-    }
     public State GetCurrentState()
     {
         return currentState;
     }
+
+    public void SpecialFlashlightHit()
+    {
+        if (!isFleeingDueToFlashlight)
+        {
+            StartCoroutine(FreezeAndFlee());
+        }
+    }
+
+    private IEnumerator FreezeAndFlee()
+    {
+        isFleeingDueToFlashlight = true;
+       
+         // Freeze the enemy for 3 seconds
+        agent.isStopped = true;
+        yield return new WaitForSeconds(3f);
+
+        // After 3 seconds, resume movement and switch to flee state
+        agent.isStopped = false;
+        currentState = State.Flee;
+        isFleeingDueToFlashlight = false; // Reset the flag after starting to flee
+    }
+
+
+
+
 }

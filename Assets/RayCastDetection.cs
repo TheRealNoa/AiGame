@@ -6,12 +6,19 @@ public class RayCastDetection : MonoBehaviour
     public bool isLooking = false;
     public bool isSpecial;
 
-    FlashlightToggle ft;
+    private FlashlightToggle ft;
+    private SC_NPCFollow enemyFollowScript;
+    private bool hasTriggeredPause = false;
+
     private void Start()
     {
         GameObject Player = GameObject.Find("Flashlight");
         ft = Player.GetComponent<FlashlightToggle>();
+
+        // Assign the SC_NPCFollow script
+        enemyFollowScript = GetComponent<SC_NPCFollow>();
     }
+
     void Update()
     {
         // Cast a ray from the camera to check if it hits this object
@@ -23,16 +30,24 @@ public class RayCastDetection : MonoBehaviour
             {
                 // Player is looking at this object
                 isLooking = true;
-                if (ft.specialIsOn) { isSpecial = true; }
-                else isSpecial = false;
-                //Debug.Log("Player is looking at " + gameObject.name);
+                isSpecial = ft.specialIsOn;
+
+                // Trigger the pause and flee behavior if the special flashlight mode is on for the first time
+                if (isSpecial && !hasTriggeredPause)
+                {
+                    hasTriggeredPause = true;
+                    if (enemyFollowScript != null)
+                    {
+                      enemyFollowScript.SpecialFlashlightHit();
+                    }
+                }
             }
         }
         else
         {
             isLooking = false;
             isSpecial = false;
+            hasTriggeredPause = false;
         }
-
     }
 }

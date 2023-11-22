@@ -56,7 +56,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 // Hurt the enemy
                 HurtEnemy(FlashlightDamage);
-                Debug.Log("Enemy was hurt");
+               //  Debug.Log("Enemy was hurt");
             }
 
             // Wait for 0.2 seconds before the next check
