@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace XEntity.InventoryItemSystem
@@ -262,6 +263,8 @@ namespace XEntity.InventoryItemSystem
                 if (slots[i].slotItem == item) return true;
             return false;
         }
+
+
 
         public bool ContainsItemName(string itemname)
         {

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PlayerInv
   - Selectable
+  - DoubleBattery
+  - SingleBattery
+  - Item
   layers:
   - Default
   - TransparentFX

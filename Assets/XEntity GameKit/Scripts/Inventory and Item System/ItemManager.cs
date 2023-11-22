@@ -102,7 +102,6 @@ namespace XEntity.InventoryItemSystem
             // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
             addBattery = true;
-            Debug.Log("Heal is true.");
 
         }
         private void UseBattery2(ItemSlot slot)
@@ -111,7 +110,6 @@ namespace XEntity.InventoryItemSystem
             // PlayerStats.Instance.Heal(1);
             slot.Remove(1);
             addTwoBatteries = true;
-            Debug.Log("Heal is true.");
 
         }
 
@@ -156,7 +154,10 @@ namespace XEntity.InventoryItemSystem
         }
         /// ----------------------------------------------
 
-
+        public List<Item> getItems()
+        {
+            return itemList;
+        }
         //Returns the item from itemList at index.
         public Item GetItemByIndex(int index) 
         {
