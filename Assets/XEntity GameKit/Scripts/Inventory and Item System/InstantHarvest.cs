@@ -6,7 +6,7 @@ namespace XEntity.InventoryItemSystem
     //NOTE: The item is only added if the interactor is within the interaction range.
     public class InstantHarvest : MonoBehaviour, IInteractable
     {
-        private bool isHarvested = false;
+        public bool isHarvested = false;
 
         //The item that will be harvested on click.
         public Item harvestItem;
