@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.082
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1610177281}
-  m_IndirectSpecularColor: {r: 0.09600366, g: 0.09869156, b: 0.090927355, a: 0.082}
+  m_IndirectSpecularColor: {r: 0.096003585, g: 0.098691486, b: 0.09092722, a: 0.082}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7071,6 +7071,9 @@ MonoBehaviour:
   patrolSpeed: 3
   chaseSpeed: 5
   fleeSpeed: 5
+  endFleeSpeed: 8
+  endChaseSpeed: 4
+  endPatrolSpeed: 3
 --- !u!195 &471687551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10276,7 +10279,7 @@ Transform:
   m_GameObject: {fileID: 785129895}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.801, y: 0.81, z: 10.157}
+  m_LocalPosition: {x: 1.801, y: 0.81, z: 5.03}
   m_LocalScale: {x: 0.7631579, y: 0.76, z: 0.7631579}
   m_ConstrainProportionsScale: 0
   m_Children:

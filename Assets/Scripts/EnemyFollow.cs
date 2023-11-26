@@ -33,7 +33,6 @@ public class SC_NPCFollow : MonoBehaviour
     public float attackDistance = 3f;
     public float hurtAmount = 1f;
     private bool canAttack = true;
-    private float attackTimer = 0f;
 
     public float patrolSpeed = 1.5f;
     public float chaseSpeed = 2.5f;
@@ -44,8 +43,6 @@ public class SC_NPCFollow : MonoBehaviour
 
     private bool isNotSpawnedCoroutineRunning = false;
     
-
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -361,7 +358,11 @@ public class SC_NPCFollow : MonoBehaviour
 
     public void SpecialFlashlightHit()
     {
-        if (!isFleeingDueToFlashlight)
+        if (currentState == State.Flee)
+        {
+            return;
+        }
+        else if (!isFleeingDueToFlashlight)
         {
             StartCoroutine(FreezeAndFlee());
         }

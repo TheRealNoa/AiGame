@@ -19,20 +19,18 @@ public class EnemyDoorOpener : MonoBehaviour
 
     private void OpenNearbyDoors()
     {
-
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, doorInteractionRange);
         foreach (var hitCollider in hitColliders)
         {
             DoorController door = hitCollider.GetComponent<DoorController>();
-            if (door != null)
+            if (door != null && !door.LockedByDefault)
             {
+                // Only attempt to open the door if it's not locked
                 if (!door.IsOpen)
                 {
-                    // Attempt to open the door
                     door.TryOpenDoor(); // Ensure this method exists in DoorController
                 }
             }
         }
     }
-
 }
