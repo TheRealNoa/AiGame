@@ -11,7 +11,10 @@ namespace XEntity.InventoryItemSystem
         //The item that will be harvested on click.
         public Item harvestItem;
 
+        public bool pickedup = false;
+
         //The item is instantly added to the inventory of the interactor on interact.
+
         public void OnClickInteract(Interactor interactor)
         {
             //Attempt to harvest if not harvested already
@@ -24,9 +27,20 @@ namespace XEntity.InventoryItemSystem
             {
                 if (harvestor.AddToInventory(harvestItem, gameObject))
                 {
+                    pickedup = true;
                     isHarvested = true;
                 }
-            }
+             }
+         }
+
+        public Item GetItem()
+        {
+            return harvestItem;
+        }
+
+        public ItemType GetItemType()
+        {
+            return harvestItem.getItemType();
         }
     }
 }

@@ -21,6 +21,11 @@ namespace XEntity.InventoryItemSystem
         [TextArea]
         public string itemInformation;
 
+
+        public ItemType getItemType()
+        {
+            return type;
+        }
         #endregion
     }
 }

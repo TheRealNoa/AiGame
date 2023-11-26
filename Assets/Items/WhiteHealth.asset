@@ -15,6 +15,6 @@ MonoBehaviour:
   type: 6
   itemName: 
   itemPerSlot: 0
-  icon: {fileID: 21300000, guid: 454bf2b9c78be8b4e9b704dcfbf8dfd3, type: 3}
+  icon: {fileID: 21300000, guid: 797374dd00efb2c498445cf9394fe889, type: 3}
   prefab: {fileID: 0}
-  itemInformation: 
+  itemInformation: Gives 10 health.

@@ -12,6 +12,11 @@ namespace XEntity.InventoryItemSystem
         //Reference to the item container thats dedicated to this interactor.
         public ItemContainer inventory;
 
+        public ItemContainer getInventory()
+        {
+            return inventory;
+        }
+
         //Reference to the current interactable target; always evaluated at runtime.
         //This is null if there are no valid target interactable objects. 
         private InteractionTarget interactionTarget;
