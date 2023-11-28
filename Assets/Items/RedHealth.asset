@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: White Medkit
   itemPerSlot: 30
   icon: {fileID: 21300000, guid: 454bf2b9c78be8b4e9b704dcfbf8dfd3, type: 3}
-  prefab: {fileID: 1279140426991430450, guid: 360690a7c06559a4f927c76899139848, type: 3}
-  itemInformation: Gives 20 health.
+  prefab: {fileID: -927199367670048503, guid: 4e3859e7d4623f64ca345e315aebd6e6, type: 3}
+  itemInformation: Gives 10 health.
