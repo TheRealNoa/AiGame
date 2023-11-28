@@ -69,6 +69,16 @@ public class EnemyHealth : MonoBehaviour
         // Your logic to hurt the enemy
         enemyHP -= damage;
     }
+
+    public void HealEnemy(float heal)
+    {
+        _enemyHP += heal;
+    }
+
+    public double getHP()
+    {
+        return _enemyHP;
+    }
     // Update is called once per frame
 
 }

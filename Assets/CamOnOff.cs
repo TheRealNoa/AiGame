@@ -37,8 +37,7 @@ public class CamOnOff : MonoBehaviour
                 if (pm != null)
                 {
                     pm.enabled = false;
-                    pm.xsensitivity = 0;
-                    pm.ysensitivity = 0;
+                    pm.mouseSensitivity = 0;
                 }
                 else
                 {
@@ -51,8 +50,7 @@ public class CamOnOff : MonoBehaviour
                 if (pm != null)
                 {
                     pm.enabled = true;
-                    pm.xsensitivity = 30;
-                    pm.ysensitivity = 30;
+                    pm.mouseSensitivity = 30;
                 }
                 else
                 {

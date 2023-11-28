@@ -11,13 +11,15 @@ namespace XEntity.InventoryItemSystem
         public bool cameraMovement = true;
         public ItemContainer Instance;
 
+        public bool isOpen;
+
         [Header("Do NOT assign interactor on external containers.")]
         //The carrier is the interactor this ItemContainer is assigned to. For a player it is the general player inventory.
         public Interactor containerInteractor;
         [SerializeField]
         protected string containerTitle;
         [SerializeField]
-        protected KeyCode UIToggleKey = KeyCode.I;
+        protected KeyCode UIToggleKey = KeyCode.Tab;
         [SerializeField]
         private SlotOptions[] customOptionsMenuConfig;
         //If this is true, when items are removed from this container, they will be dropped in front of the container.
@@ -244,7 +246,11 @@ namespace XEntity.InventoryItemSystem
         //Checks for user inputs and updates the toggle state of the UI accordingly.
         protected void CheckForUIToggleInput()
         {
-            if (Input.GetKeyDown(UIToggleKey)) ToggleUI();
+            if (Input.GetKeyDown(UIToggleKey)) 
+            {
+                ToggleUI();
+                isOpen = !isOpen;
+            }
         }
 
         //Returns true if it's able to add the item to the container.
