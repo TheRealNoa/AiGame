@@ -19,6 +19,8 @@ namespace XEntity.InventoryItemSystem
         {
             //Attempt to harvest if not harvested already
             AttemptHarvest(interactor);
+            checkPickup(interactor);
+
         }
 
         public void AttemptHarvest(Interactor harvestor) 
@@ -27,6 +29,7 @@ namespace XEntity.InventoryItemSystem
             {
                 if (harvestor.AddToInventory(harvestItem, gameObject))
                 {
+                    Debug.Log("Item:" + harvestItem.name);
                     pickedup = true;
                     isHarvested = true;
                 }
@@ -41,6 +44,19 @@ namespace XEntity.InventoryItemSystem
         public ItemType GetItemType()
         {
             return harvestItem.getItemType();
+        }
+
+        public void checkPickup(Interactor harvestor)
+        {
+            string name = harvestItem.name;
+            if ("UpstairsDoubleDoor" == name)
+            {
+                Debug.Log("BROWN KEY");
+
+            }else if("OfficeKey" == name)
+            {
+                Debug.Log("OFFICE KEYY  AAAA");
+            }
         }
     }
 }

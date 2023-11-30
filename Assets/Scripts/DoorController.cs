@@ -18,6 +18,9 @@ public class DoorController : MonoBehaviour
     private bool hasCycled = false;
     private bool is_activated;
 
+    public GameObject firstdoor;
+    DoorController firstDoorController;
+
     ItemContainer playerInventory;
     ItemManager manager;
     ItemRemovalController removal;
@@ -27,6 +30,10 @@ public class DoorController : MonoBehaviour
         GameObject playerObject = GameObject.FindWithTag("PlayerInv");
         playerInventory = playerObject.GetComponent<ItemContainer>();
         doorAnimator = GetComponent<Animator>();
+        if (firstdoor != null)
+        {
+            firstDoorController = firstdoor.GetComponent<DoorController>();
+        }
 
         // Find objects with ItemContainer component
         ItemContainer[] containers = FindObjectsOfType<ItemContainer>();
@@ -156,7 +163,7 @@ public class DoorController : MonoBehaviour
                     {
                         Debug.Log("Inventory is empty.");
                     }
-                    else if (playerInventory.ContainsItemName(requiredItemName))
+                    else if (playerInventory.ContainsItemName(requiredItemName) || firstDoorController.LockedByDefault == false)
                     {
                         doorAnimator.Play(openAnimationName);
                         isOpen = true;

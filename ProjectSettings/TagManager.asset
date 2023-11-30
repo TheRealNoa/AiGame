@@ -9,6 +9,7 @@ TagManager:
   - DoubleBattery
   - SingleBattery
   - Item
+  - Enemy
   layers:
   - Default
   - TransparentFX
