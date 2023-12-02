@@ -55,7 +55,7 @@ namespace XEntity.InventoryItemSystem
 
             }else if("OfficeKey" == name)
             {
-                Debug.Log("OFFICE KEYY  AAAA");
+                Debug.Log("OFFICE KEY picked up");
             }
         }
     }

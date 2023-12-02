@@ -13,7 +13,14 @@ public class ItemRemovalController : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<DoorController>();
-        itemToRemoveName = controller.requiredItemName;
+        if (controller != null)
+        {
+            itemToRemoveName = controller.requiredItemName;
+        }
+        else
+        {
+            itemToRemoveName = null;
+        }
         GameObject playerObject = GameObject.FindWithTag("PlayerInv");
         playerInventory = playerObject.GetComponent<ItemContainer>();
     }

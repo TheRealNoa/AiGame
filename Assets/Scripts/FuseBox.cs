@@ -1,16 +1,21 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using XEntity.InventoryItemSystem;
 
 public class GameObjectInteraction : MonoBehaviour
 {
     public string requiredItemName;
-    private bool hasItem = false;
+    public bool hasItem = false;
     private bool on;
     ItemContainer playerInventory;
+    private Camera cam;
+    [SerializeField]
+    private BoxCollider targetCollider;
     void Start()
     {
         GameObject playerObject = GameObject.FindWithTag("PlayerInv");
         playerInventory = playerObject.GetComponent<ItemContainer>();
+        cam = Camera.main;
 
     }
     void Update()
@@ -23,35 +28,42 @@ public class GameObjectInteraction : MonoBehaviour
 
     void TryInteractWithObject()
     {
-        if (playerInventory.ContainsItemName(requiredItemName) && !hasItem)
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1))
         {
-            ItemSlot slotToRemove = FindItemSlot(requiredItemName);
-            ToggleLightsOff(true);
-            hasItem = true;
-            on = true;
-            Debug.Log($"Used {requiredItemName} to toggle lights off.");
-            slotToRemove.Remove(1);
-            Debug.Log($"Removed {requiredItemName} from inventory.");
-        }
-        else if (hasItem)
-        {
-            if (on) 
+            if (hit.collider == targetCollider)
             {
-                ToggleLightsOff(false);
-                Debug.Log("All lights have been toggled");
-                on = false;
+                if (playerInventory.ContainsItemName(requiredItemName) && !hasItem)
+                {
+                    ItemSlot slotToRemove = FindItemSlot(requiredItemName);
+                    ToggleLightsOff(true);
+                    hasItem = true;
+                    on = true;
+                    Debug.Log($"Used {requiredItemName} to toggle lights off.");
+                    slotToRemove.Remove(1);
+                    Debug.Log($"Removed {requiredItemName} from inventory.");
+                }
+                else if (hasItem)
+                {
+                    if (on)
+                    {
+                        ToggleLightsOff(false);
+                        Debug.Log("All lights have been toggled off");
+                        on = false;
+                    }
+                    else if (!on)
+                    {
+                        ToggleLightsOff(true);
+                        Debug.Log("All lights have been toggled on");
+                        on = true;
+                    }
+
+                }
+                else
+                {
+                    Debug.Log($"You need {requiredItemName} to interact with this object.");
+                }
             }
-            else if (!on)
-            {
-                ToggleLightsOff(true);
-                Debug.Log("All lights have been toggled");
-                on = true;
-            }
-            
-        }
-        else
-        {
-            Debug.Log($"You need {requiredItemName} to interact with this object.");
         }
     }
 

@@ -24,7 +24,6 @@ public class SC_NPCFollow : MonoBehaviour
 
     // Fleeing paramaters
     private bool isFleeingDueToFlashlight = false;
-    private bool isPausedByFlashlight = false;
     bool IsFleePointSet = false;
 
     // Attack Parameters

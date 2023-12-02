@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class LightToggle : MonoBehaviour
 {
-    private Light targetLight;
-    private bool canToggle = false;
+    public Light targetLight;
+    public bool canToggle = false;
+    public bool toggle = false;
+
 
     void Start()
     {
         targetLight = GetComponent<Light>();
+        ToggleLight();
+        canToggle = false;
 
         if (targetLight == null)
         {
@@ -15,20 +19,17 @@ public class LightToggle : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        if (canToggle && Input.GetKeyDown(KeyCode.Space))
+        if (toggle)
         {
             ToggleLight();
-        }
-        else if (!canToggle && Input.GetKeyDown(KeyCode.Space))
-        {
-            targetLight.enabled = false;
-            Debug.Log("You can't because All lights have been switched off");
+            toggle = false;
+            Debug.Log("Light has been TOGGLED");
         }
     }
 
-    void ToggleLight()
+    public void ToggleLight()
     {
         if (targetLight != null)
         {

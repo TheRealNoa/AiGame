@@ -1,9 +1,7 @@
 using UnityEngine;
 using XEntity.InventoryItemSystem;
 
-using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using XEntity.InventoryItemSystem;
+
 
 public class DoorController : MonoBehaviour
 {
@@ -27,7 +25,7 @@ public class DoorController : MonoBehaviour
 
     private void Start()
     {
-        GameObject playerObject = GameObject.FindWithTag("PlayerInv");
+    GameObject playerObject = GameObject.FindWithTag("PlayerInv");
         playerInventory = playerObject.GetComponent<ItemContainer>();
         doorAnimator = GetComponent<Animator>();
         if (firstdoor != null)
@@ -153,7 +151,14 @@ public class DoorController : MonoBehaviour
                         }
                         else
                         {
-                            print($"You need {requiredItemName} to open this door.");
+                            if (firstdoor != null)
+                            {
+                                print($"You need {requiredItemName} to open this door.");
+                            }
+                            else
+                            {
+                                Debug.Log("The door next is locked and needs" + firstDoorController.requiredItemName + " to open this one");
+                            }
                         }
                     }
                 }
@@ -163,7 +168,24 @@ public class DoorController : MonoBehaviour
                     {
                         Debug.Log("Inventory is empty.");
                     }
-                    else if (playerInventory.ContainsItemName(requiredItemName) || firstDoorController.LockedByDefault == false)
+                    else if (firstdoor != null)
+                    {
+                        if (playerInventory.ContainsItemName(requiredItemName) || firstDoorController.LockedByDefault == false)
+                        {
+                            doorAnimator.Play(openAnimationName);
+                            isOpen = true;
+                            LockedByDefault = false;
+                            print("door opened");
+                            RemoveItem();
+                            hasCycled = true;
+                        }
+                        else
+                        {
+                            print("Door locked");
+                            print($"You need to unlock the door next over to open this door.");
+                        }
+                    }
+                    else if (playerInventory.ContainsItemName(requiredItemName))
                     {
                         doorAnimator.Play(openAnimationName);
                         isOpen = true;
@@ -172,11 +194,11 @@ public class DoorController : MonoBehaviour
                         RemoveItem();
                         hasCycled = true;
                     }
-                    else
+                    else if(requiredItemName != "")
                     {
-                        print("door locked aaaaaaaaaaa");
-                        print($"You need {requiredItemName} to open this door.");
+                        Debug.Log($"Player needs {requiredItemName} to open this door.");
                     }
+                    
                 }
             }
         }
