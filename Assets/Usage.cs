@@ -31,6 +31,7 @@ public class Usage : MonoBehaviour
             }
             else { bc._showingHP = 100;
                 im.addBattery = false;
+                bc.used = true;
             }
         }
         if (im.addTwoBatteries)
@@ -44,6 +45,7 @@ public class Usage : MonoBehaviour
             }
             else { bc._showingHP = 100;
                 im.addTwoBatteries = false;
+                bc.used = true;
             }
         }
     }

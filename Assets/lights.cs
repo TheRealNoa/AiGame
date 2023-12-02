@@ -8,6 +8,16 @@ public class ObjectLightController : MonoBehaviour
     private List<Light> lightsList = new List<Light>();
     [SerializeField]
     private BoxCollider targetCollider;
+    private float percentageAddition = 0.02f;
+
+    EnemyFuseBox enemyFuseBox;
+    GameObject enemy;
+
+    private void Start()
+    {
+        enemy = GameObject.Find("Enemy");
+        enemyFuseBox = enemy.GetComponent<EnemyFuseBox>();
+    }
 
     void Update()
     {
@@ -28,6 +38,11 @@ public class ObjectLightController : MonoBehaviour
                 foreach (Light lightObject in lightsList)
                 {
                     LightToggle lightToggle = lightObject.GetComponent<LightToggle>();
+                    enemyFuseBox.probabilityToTurnLightsOff += percentageAddition;// adds x chance for enemy to turn off all lights
+                                                                      ///--------------------NOTE
+                                                                      /// This is PER LIGHT SOURCE in the list of lights
+                                                                      /// ... meaning, if a switch activates 1 light, we add x%;
+                                                                      /// if a switch activates 5 lights, we add 5x%
 
                     if (lightToggle != null)
                     {

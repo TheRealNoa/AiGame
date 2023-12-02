@@ -6,7 +6,7 @@ public class GameObjectInteraction : MonoBehaviour
 {
     public string requiredItemName;
     public bool hasItem = false;
-    private bool on;
+    public bool on;
     ItemContainer playerInventory;
     private Camera cam;
     [SerializeField]
@@ -67,7 +67,7 @@ public class GameObjectInteraction : MonoBehaviour
         }
     }
 
-    void ToggleLightsOff(bool value)
+    public void ToggleLightsOff(bool value)
     {
         LightToggle[] lightToggleScripts = FindObjectsOfType<LightToggle>();
 
