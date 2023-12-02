@@ -14,7 +14,6 @@ public class DoorController : MonoBehaviour
     private Animator doorAnimator;
     private bool isOpen = false;
     private bool hasCycled = false;
-    private bool is_activated;
 
     public GameObject firstdoor;
     DoorController firstDoorController;
@@ -95,9 +94,7 @@ public class DoorController : MonoBehaviour
                 if (slotToRemove != null)
                 {
                     slotToRemove.Remove(1);
-                    Debug.Log($"Removed {requiredItemName} from inventory.");
-                    is_activated = false;
-                }
+                    Debug.Log($"Removed {requiredItemName} from inventory.");                }
             }
             else
             {

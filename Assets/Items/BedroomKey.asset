@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: BedroomKey
   m_EditorClassIdentifier: 
   type: 0
-  itemName: 
+  itemName: Bedroom Key
   itemPerSlot: 0
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  icon: {fileID: 21300000, guid: 13c925c9c6716194f9fe832914b37154, type: 3}
+  prefab: {fileID: 3445352999058701145, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}
   itemInformation: 
