@@ -8,6 +8,7 @@ namespace XEntity.InventoryItemSystem
     //This script is attached to the UI representation of the item container. An example item container UI prefab is provided with the asset.
     public class ItemContainer : MonoBehaviour
     {
+
         public bool cameraMovement = true;
         public ItemContainer Instance;
 
@@ -40,6 +41,8 @@ namespace XEntity.InventoryItemSystem
         protected bool isContainerUIOpen = false;
         protected bool isUIInitialized;
         protected Transform containerPanel;
+
+
 
 
 
