@@ -24,6 +24,12 @@ public class GameObjectInteraction : MonoBehaviour
         {
             TryInteractWithObject();
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            hasItem = true;
+            on = true;
+            ToggleLightsOff(true);
+        }
     }
 
     void TryInteractWithObject()
