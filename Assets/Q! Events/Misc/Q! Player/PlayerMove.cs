@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     {
         PlayerMovement();
     }
-
+    #pragma warning disable 0618
     private void PlayerMovement()
     {
         float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
@@ -35,11 +35,16 @@ public class PlayerMove : MonoBehaviour
         Vector3 forwardMovement = transform.forward * vertInput;
         Vector3 rightMovement = transform.right * horizInput;
 
-        if (charController != null) { charController.SimpleMove(forwardMovement + rightMovement); }
+        if (charController != null && charController.enabled) { charController.SimpleMove(forwardMovement + rightMovement); }
+        else {
+        ///
+        /// LEAVE THIS EMPTY
+        ///
+            }
 
         JumpInput();
-
     }
+
 
     private void JumpInput()
     {

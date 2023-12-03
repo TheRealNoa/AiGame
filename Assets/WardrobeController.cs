@@ -104,20 +104,25 @@ public class WardrobeController : MonoBehaviour
         }
     }
     public bool isActivated;
+
+    #pragma warning disable 0618
     private IEnumerator DoSomethingAfterDelay()
     {
+
         while(isActivated)
         {
+
             yield return new WaitForSeconds(1f);
             playerAnimator.enabled = false;
 
             // Do something after the delay
             Debug.Log("After 2 seconds, do something here!");
             isActivated = false;
-            cc.enabled = true;
             chc.enabled = true;
+            cc.enabled = true;
         }
     }
+        #pragma warning restore 0618
 
     public void TryOpenDoor()
     {
