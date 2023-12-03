@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25fc3ddfe7c7cf42ab0b71ce17fa443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRange: 2
+  interactionRange: 0.6
   openAnimationName: InWardrobe
   closeAnimationName: OutWardrobe
   LockedByDefault: 0
