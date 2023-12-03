@@ -31,6 +31,9 @@ public class WardrobeController : MonoBehaviour
 
     public bool isInside;
 
+    [SerializeField]
+    public int identifier;
+
     private void Start()
     {
         player = GameObject.Find("Player");
@@ -78,11 +81,13 @@ public class WardrobeController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isInside)
-        {
+        { 
             TryInteractWithDoor();
         }
         else if( Input.GetKeyDown(KeyCode.E) && isInside)
         {
+            pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
+            Debug.Log("PC identifier 3: " + pc.identifier);
             pc.activate = true;
             pm.enabled = true;
             isActivated = true;
@@ -174,6 +179,8 @@ public class WardrobeController : MonoBehaviour
                 {
                     if (isOpen)
                     {
+                        pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
+                        Debug.Log("PC identifier: " + pc.identifier);
                         playerAnimator.enabled = true;
                         doorAnimator.Play(openAnimationName);
 
@@ -190,6 +197,8 @@ public class WardrobeController : MonoBehaviour
                         // Check if the required item is in the player's inventory
                         if (requiredItemName == "" || hasCycled || (!LockedByDefault))
                         {
+                            pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
+                            Debug.Log("PC identifier 2: " + pc.identifier);
                             playerAnimator.enabled = true;
                             doorAnimator.Play(openAnimationName);
                             
