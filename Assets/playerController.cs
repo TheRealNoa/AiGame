@@ -49,8 +49,14 @@ public class playerController : MonoBehaviour
             TryMoveCamera();
         }else if(identifier == 1)
         {
-            inCloset = "InCloset1";
-            outCloset = "OutCloset1";
+            inCloset = "GInCloset";
+            outCloset = "GOutCloset";
+            TryMoveCamera();
+        }
+        else
+        {
+            inCloset = "GInCloset";
+            outCloset = "GOutCloset";
             TryMoveCamera();
         }
     }

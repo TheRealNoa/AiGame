@@ -29,6 +29,10 @@ public class WardrobeController : MonoBehaviour
     Animator playerAnimator;
     PlayerMove pm;
 
+    CapsuleCollider cc;
+    CharacterController chc;
+
+
     public bool isInside;
 
     [SerializeField]
@@ -40,6 +44,8 @@ public class WardrobeController : MonoBehaviour
         pc = player.GetComponent<playerController>();
         playerAnimator = player.GetComponent<Animator>();
         pm = player.GetComponent<PlayerMove>();
+        cc = player.GetComponent<CapsuleCollider>();
+        chc = player.GetComponent<CharacterController>();
 
 
 
@@ -108,6 +114,8 @@ public class WardrobeController : MonoBehaviour
             // Do something after the delay
             Debug.Log("After 2 seconds, do something here!");
             isActivated = false;
+            cc.enabled = true;
+            chc.enabled = true;
         }
     }
 
@@ -179,13 +187,14 @@ public class WardrobeController : MonoBehaviour
                 {
                     if (isOpen)
                     {
+                        chc.enabled = false;
+                        cc.enabled = false;
                         pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
                         Debug.Log("PC identifier: " + pc.identifier);
                         playerAnimator.enabled = true;
                         doorAnimator.Play(openAnimationName);
 
                         pc.activate = !pc.activate;
-
                         playerAnimator.enabled = true;
                         isOpen = false;
                         print("door opened");
@@ -197,13 +206,14 @@ public class WardrobeController : MonoBehaviour
                         // Check if the required item is in the player's inventory
                         if (requiredItemName == "" || hasCycled || (!LockedByDefault))
                         {
+                            chc.enabled = false;
+                            cc.enabled = false;
                             pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
                             Debug.Log("PC identifier 2: " + pc.identifier);
                             playerAnimator.enabled = true;
                             doorAnimator.Play(openAnimationName);
                             
                             pc.activate = !pc.activate;
-                            
                             playerAnimator.enabled = true;
                             isOpen = true;
                             print("door opened");
