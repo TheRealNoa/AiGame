@@ -12,6 +12,8 @@ public class playerController : MonoBehaviour
 
         public string inCloset;
         public string outCloset;
+
+        public bool playerHidden;
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -23,18 +25,21 @@ public class playerController : MonoBehaviour
             {
                 activate = false;
                 CheckAnimationIdentifier();
+                
             }
         }
         void TryMoveCamera()
         {
             if (!played)
             {
+            playerHidden = true;
                 animator.Play(inCloset);
                 played = !played;
             }
             else
             {
-                animator.Play(outCloset);
+            playerHidden = false;
+            animator.Play(outCloset);
                 played = !played;
             }
 

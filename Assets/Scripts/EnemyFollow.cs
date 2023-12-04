@@ -43,6 +43,8 @@ public class SC_NPCFollow : MonoBehaviour
 
     private bool isNotSpawnedCoroutineRunning = false;
 
+    GameObject player;
+    playerController pc;
 
     [SerializeField] Transform[] PathPoints;
     private int pointIndex;
@@ -50,10 +52,15 @@ public class SC_NPCFollow : MonoBehaviour
     SC_NPCFollow enemyFollow;
     float enemySpeed;
 
+    float forwardSpeed;
+
     public bool pathActivated;
 
     void Start()
     {
+        player = GameObject.Find("Player");
+        pc = player.GetComponent<playerController>();
+
         agent = GetComponent<NavMeshAgent>();
         enemyHealthScript = GetComponent<EnemyHealth>();
         ToggleVisibilityAndInteractivity(false);
@@ -62,6 +69,9 @@ public class SC_NPCFollow : MonoBehaviour
 
     void Update()
     {
+        float forwardSpeed = Vector3.Dot(agent.velocity.normalized, transform.forward);
+        Debug.Log(forwardSpeed);
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentState = State.NotSpawned;
@@ -133,6 +143,11 @@ public class SC_NPCFollow : MonoBehaviour
                     UpdateStationaryTimer();
                     break;
                 case State.FirstHide:
+                    if (!checkedForPlayer)
+                    {
+                        StartCoroutine(CheckForPlayer());
+                        checkedForPlayer = true;
+                    }
                     FirstHide();
                     break;
             }
@@ -142,49 +157,76 @@ public class SC_NPCFollow : MonoBehaviour
     public Vector3 StartPosition;
     public Vector3 EndPosition;
     private bool isGoingOnPath;
+    private bool playerNoticed;
+    public bool checkedForPlayer;
     void FirstHide()
     {
-        float distanceToDestination = Vector3.Distance(transform.position, agent.destination);
-        distanceToDestination = distanceToDestination - 1;
-        if (!pathActivated)
+        if(!playerNoticed)
         {
-            pathActivated = true;
-            transform.position = (PathPoints[0].position);
-            distanceToDestination = Vector3.Distance(transform.position, agent.destination);
-            if(distanceToDestination > 0.2)
+            float distanceToDestination = Vector3.Distance(transform.position, agent.destination);
+            distanceToDestination = distanceToDestination - 1;
+            if (!pathActivated)
             {
-                pointIndex++;
-                isGoingOnPath = true;
-            }
-            else
-            {
+                pathActivated = true;
                 transform.position = (PathPoints[0].position);
-            }
-        }
-        if (isGoingOnPath) {
-            {
-                agent.SetDestination(PathPoints[pointIndex].position);
-                Debug.Log("Current Destination: " + pointIndex);
                 distanceToDestination = Vector3.Distance(transform.position, agent.destination);
-                distanceToDestination -= 1;
-                Debug.Log("Distance to destination: " + distanceToDestination);
-                if (distanceToDestination<0.05f)
+                if(distanceToDestination > 0.2)
                 {
-                    if(pointIndex < PathPoints.Length - 1)
+                    pointIndex++;
+                    isGoingOnPath = true;
+                }
+                else
+                {
+                    transform.position = (PathPoints[0].position);
+                }
+            }
+            if (isGoingOnPath)
+            {
+                {
+                    agent.SetDestination(PathPoints[pointIndex].position);
+                    distanceToDestination = Vector3.Distance(transform.position, agent.destination);
+                    distanceToDestination -= 1;
+                    if (distanceToDestination < 0.05f)
                     {
-                        pointIndex++;
-                        Debug.Log("New destination distance:" + distanceToDestination);
-                    }
-                    else
-                    {
-                        currentState = State.NotSpawned;
+                        if (pointIndex < PathPoints.Length - 1)
+                        {
+                            pointIndex++;
+                        }
+                        else
+                        {
+                            currentState = State.NotSpawned;
+                        }
                     }
                 }
             }
+        }else if(playerNoticed)
+        {
+            currentState = State.Chase;
         }
     }
-
-
+    IEnumerator CheckForPlayer()
+    {
+        yield return new WaitForSeconds(1);
+        Debug.Log("Checked for player");
+        checkedForPlayer = false;
+        if (!pc.playerHidden)
+        {
+            float distancetoPlayer = Vector3.Distance(transform.position, transformToFollow.position);
+            if (distancetoPlayer < attackDistance)
+            {
+                playerNoticed = true;
+                Debug.Log("Player noticed");
+            }
+            else
+            {
+                playerNoticed = false;
+            }
+        }
+        else
+        {
+            playerNoticed = false;
+        }
+    }
 
 
     // Start States
@@ -319,7 +361,7 @@ public class SC_NPCFollow : MonoBehaviour
 
     private void UpdateStationaryTimer()
     {
-        if (agent.velocity.magnitude < 0.1f)
+        if (forwardSpeed<0.5)
         {
             stationaryTimer += Time.deltaTime;
 

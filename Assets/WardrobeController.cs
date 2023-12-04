@@ -105,7 +105,6 @@ public class WardrobeController : MonoBehaviour
     }
     public bool isActivated;
 
-    #pragma warning disable 0618
     private IEnumerator DoSomethingAfterDelay()
     {
 
@@ -122,7 +121,6 @@ public class WardrobeController : MonoBehaviour
             cc.enabled = true;
         }
     }
-        #pragma warning restore 0618
 
     public void TryOpenDoor()
     {
