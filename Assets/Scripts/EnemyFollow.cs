@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.Apple;
 
 public class SC_NPCFollow : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class SC_NPCFollow : MonoBehaviour
 
     public NavMeshAgent agent;
     private EnemyHealth enemyHealthScript;
-   
+
     // State Parameters
-    public enum State { NotSpawned, Patrol, Chase, Flee, EndNotSpawned, EndPatrol, EndChase, EndFlee }
+    public enum State { NotSpawned, Patrol, Chase, Flee, EndNotSpawned, EndPatrol, EndChase, EndFlee, FirstHide }
     public State currentState = State.NotSpawned;
 
     // Patrol State Parameters
@@ -41,7 +42,16 @@ public class SC_NPCFollow : MonoBehaviour
     public float endPatrolSpeed = 3.0f;
 
     private bool isNotSpawnedCoroutineRunning = false;
-    
+
+
+    [SerializeField] Transform[] PathPoints;
+    private int pointIndex;
+    bool firstPoint;
+    SC_NPCFollow enemyFollow;
+    float enemySpeed;
+
+    public bool pathActivated;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -52,22 +62,26 @@ public class SC_NPCFollow : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             currentState = State.NotSpawned;
             StartCoroutine(NotSpawned());
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) 
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             currentState = State.Patrol;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3)) 
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             currentState = State.Chase;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4)) 
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             currentState = State.Flee;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            currentState = State.FirstHide;
         }
 
         if (enemyHealthScript.enemyHealth < 50)
@@ -118,9 +132,59 @@ public class SC_NPCFollow : MonoBehaviour
                     Flee();
                     UpdateStationaryTimer();
                     break;
+                case State.FirstHide:
+                    FirstHide();
+                    break;
             }
         }
     }
+
+    public Vector3 StartPosition;
+    public Vector3 EndPosition;
+    private bool isGoingOnPath;
+    void FirstHide()
+    {
+        float distanceToDestination = Vector3.Distance(transform.position, agent.destination);
+        distanceToDestination = distanceToDestination - 1;
+        if (!pathActivated)
+        {
+            pathActivated = true;
+            transform.position = (PathPoints[0].position);
+            distanceToDestination = Vector3.Distance(transform.position, agent.destination);
+            if(distanceToDestination > 0.2)
+            {
+                pointIndex++;
+                isGoingOnPath = true;
+            }
+            else
+            {
+                transform.position = (PathPoints[0].position);
+            }
+        }
+        if (isGoingOnPath) {
+            {
+                agent.SetDestination(PathPoints[pointIndex].position);
+                Debug.Log("Current Destination: " + pointIndex);
+                distanceToDestination = Vector3.Distance(transform.position, agent.destination);
+                distanceToDestination -= 1;
+                Debug.Log("Distance to destination: " + distanceToDestination);
+                if (distanceToDestination<0.05f)
+                {
+                    if(pointIndex < PathPoints.Length - 1)
+                    {
+                        pointIndex++;
+                        Debug.Log("New destination distance:" + distanceToDestination);
+                    }
+                    else
+                    {
+                        currentState = State.NotSpawned;
+                    }
+                }
+            }
+        }
+    }
+
+
 
 
     // Start States
