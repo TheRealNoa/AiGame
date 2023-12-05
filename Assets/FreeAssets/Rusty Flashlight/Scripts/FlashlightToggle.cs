@@ -9,9 +9,9 @@ public class FlashlightToggle : MonoBehaviour
     public GameObject lightGO; //light gameObject to work with
     private bool isOn = false; //is flashlight on or off?
     public bool specialIsOn = false;
-
+    GameObject lightObject;
     public BatteryControll batteryControll;
-    
+    Light lightComponent;
 
     // Use this for initialization
     void Start()
@@ -26,85 +26,100 @@ public class FlashlightToggle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isOn && !specialIsOn)
+        if (isOn && !specialIsOn)
         {
             batteryControll.regular();
-        }else if(isOn && specialIsOn) 
+            GameObject lightObject = GameObject.Find("LightOuter");
+            Light lightComponent = lightObject.GetComponent<Light>();
+            Color newColor = Color.white;
+            lightComponent.color = newColor;
+        }
+        else if (isOn && specialIsOn)
         {
             batteryControll.special();
         }
-        
+
         float value = batteryControll._showingHP;
-        if(value <= 0)
+        if (value <= 0)
         {
-            if(isOn)
+
+            if (isOn)
             {
                 isOn = !isOn;
                 lightGO.SetActive(false);
+                specialIsOn = false;
+                GameObject lightObject = GameObject.Find("LightOuter");
+                if(lightComponent  != null)
+                {
+                    lightComponent = lightObject.GetComponent<Light>();
+                    Color newColor = Color.white;
+                    lightComponent.color = newColor;
+                }
             }
         }
-     
+
         //toggle flashlight on key down
         //if (Input.GetMouseButtonDown(1)) FOR SPECIAL ATTACK
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (value > 0)
+                if (value > 0)
+                {
+                    //toggle light
+                    isOn = !isOn;
+                    //turn light on
+                    if (isOn)
+
+                        lightGO.SetActive(true);
+
+                    //turn light off
+                    else
+                    {
+                        GameObject lightObject = GameObject.Find("LightOuter");
+                        Light lightComponent = lightObject.GetComponent<Light>();
+                        Color newColor = Color.white;
+                        lightComponent.color = newColor;
+                        lightGO.SetActive(false);
+                        specialIsOn = false;
+
+                    }
+                }
+                else
+                {
+                    lightGO.SetActive(false);
+                    specialIsOn = false;
+
+                }
+
+            }
+            else if ((Input.GetMouseButtonDown(1)))
             {
-                //toggle light
-                isOn = !isOn;
-                //turn light on
                 if (isOn)
-
-                    lightGO.SetActive(true);
-
-                //turn light off
-                else
                 {
-                    GameObject lightObject = GameObject.Find("LightOuter");
-                    Light lightComponent = lightObject.GetComponent<Light>();
-                    Color newColor = Color.white;
-                    lightComponent.color = newColor;
-                    lightGO.SetActive(false);
-                    specialIsOn = !specialIsOn;
-
+                    if (!specialIsOn)
+                    {
+                        GameObject lightObject = GameObject.Find("LightOuter");
+                        Light lightComponent = lightObject.GetComponent<Light>();
+                        Color newColor = Color.red;
+                        lightComponent.color = newColor;
+                        specialIsOn = true;
+                    }
+                    else
+                    {
+                        GameObject lightObject = GameObject.Find("LightOuter");
+                        Light lightComponent = lightObject.GetComponent<Light>();
+                        Color newColor = Color.white;
+                        lightComponent.color = newColor;
+                        specialIsOn = false;
+                    }
                 }
-            }
-            else
-            {
-                    lightGO.SetActive(false);
 
-               
+                else if (!isOn)
+                {
+                    Debug.Log("Flashlight is off");
+                    specialIsOn = false;
+                }
+
             }
 
         }
-        else if ((Input.GetMouseButtonDown(1))) 
-        {
-            specialIsOn = !specialIsOn;
-            if (isOn)
-            {
-                if (specialIsOn)
-                {
-                    GameObject lightObject = GameObject.Find("LightOuter");
-                    Light lightComponent = lightObject.GetComponent<Light>();
-                    Color newColor = Color.red;
-                    lightComponent.color = newColor;
-                }
-                else
-                {
-                    GameObject lightObject = GameObject.Find("LightOuter");
-                    Light lightComponent = lightObject.GetComponent<Light>();
-                    Color newColor = Color.white;
-                    lightComponent.color = newColor;
-                }
-            }
-
-            else if (!isOn)
-            {
-                Debug.Log("Flashlight is off");
-                specialIsOn = false;
-            }
-            
-        }
-
-    }
 }
