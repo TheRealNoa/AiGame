@@ -60,7 +60,12 @@ public class FlashlightToggle : MonoBehaviour
                 //turn light off
                 else
                 {
+                    GameObject lightObject = GameObject.Find("LightOuter");
+                    Light lightComponent = lightObject.GetComponent<Light>();
+                    Color newColor = Color.white;
+                    lightComponent.color = newColor;
                     lightGO.SetActive(false);
+                    specialIsOn = !specialIsOn;
 
                 }
             }
@@ -75,20 +80,28 @@ public class FlashlightToggle : MonoBehaviour
         else if ((Input.GetMouseButtonDown(1))) 
         {
             specialIsOn = !specialIsOn;
-            if (specialIsOn)
+            if (isOn)
             {
-                GameObject lightObject = GameObject.Find("LightOuter");
-                Light lightComponent = lightObject.GetComponent<Light>();
-                Color newColor = Color.red;
-                lightComponent.color = newColor;
+                if (specialIsOn)
+                {
+                    GameObject lightObject = GameObject.Find("LightOuter");
+                    Light lightComponent = lightObject.GetComponent<Light>();
+                    Color newColor = Color.red;
+                    lightComponent.color = newColor;
+                }
+                else
+                {
+                    GameObject lightObject = GameObject.Find("LightOuter");
+                    Light lightComponent = lightObject.GetComponent<Light>();
+                    Color newColor = Color.white;
+                    lightComponent.color = newColor;
+                }
             }
 
-            else
+            else if (!isOn)
             {
-                GameObject lightObject = GameObject.Find("LightOuter");
-                Light lightComponent = lightObject.GetComponent<Light>();
-                Color newColor = Color.white;
-                lightComponent.color = newColor;
+                Debug.Log("Flashlight is off");
+                specialIsOn = false;
             }
             
         }
