@@ -79,6 +79,19 @@ namespace EvolveGames
 
         void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (Cursor.lockState == CursorLockMode.Locked)
+                {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else
+                    Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = true;
+            }
+
             RaycastHit CroughCheck;
             RaycastHit ObjectCheck;
 
