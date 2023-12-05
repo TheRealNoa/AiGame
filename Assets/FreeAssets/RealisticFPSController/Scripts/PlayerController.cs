@@ -95,9 +95,11 @@ namespace EvolveGames
             RaycastHit CroughCheck;
             RaycastHit ObjectCheck;
 
-            if (!characterController.isGrounded && !isClimbing)
-            {
-                moveDirection.y -= gravity * Time.deltaTime;
+            if(characterController !=null) {
+                if (!characterController.isGrounded && !isClimbing)
+                {
+                    moveDirection.y -= gravity * Time.deltaTime;
+                }
             }
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Vector3 right = transform.TransformDirection(Vector3.right);
@@ -109,16 +111,20 @@ namespace EvolveGames
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * vertical) + (right * horizontal);
 
-            if (Input.GetButton("Jump") && canMove && characterController.isGrounded && !isClimbing)
+            if(characterController != null)
             {
-                moveDirection.y = jumpSpeed;
+                if (Input.GetButton("Jump") && canMove && characterController.isGrounded && !isClimbing)
+                {
+                    moveDirection.y = jumpSpeed;
+                }
+                else
+                {
+                    moveDirection.y = movementDirectionY;
+                }
+                if (characterController.enabled = true) { characterController.Move(moveDirection * Time.deltaTime); }
+                Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
             }
-            else
-            {
-                moveDirection.y = movementDirectionY;
-            }
-            characterController.Move(moveDirection * Time.deltaTime);
-            Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
+
 
             if (Cursor.lockState == CursorLockMode.Locked && canMove)
             {

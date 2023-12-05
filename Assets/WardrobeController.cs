@@ -31,8 +31,8 @@ public class WardrobeController : MonoBehaviour
     PlayerMove pm;
 
     CapsuleCollider cc;
-    PlayerController chc;
-
+    CharacterController chc;
+    PlayerController playerController2;
 
     public bool isInside;
 
@@ -46,8 +46,8 @@ public class WardrobeController : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         pm = player.GetComponent<PlayerMove>();
         cc = player.GetComponent<CapsuleCollider>();
-        chc = player.GetComponent<PlayerController>();
-
+        chc = player.GetComponent<CharacterController>();
+        playerController2 = player.GetComponent<PlayerController>();
 
 
         GameObject playerObject = GameObject.FindWithTag("PlayerInv");
@@ -96,7 +96,7 @@ public class WardrobeController : MonoBehaviour
             pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
             Debug.Log("PC identifier 3: " + pc.identifier);
             pc.activate = true;
-            pm.enabled = true;
+            pm.enabled = false;
             isActivated = true;
             doorAnimator.Play(closeAnimationName);
             StartCoroutine(DoSomethingAfterDelay());
@@ -120,6 +120,7 @@ public class WardrobeController : MonoBehaviour
             isActivated = false;
             chc.enabled = true;
             cc.enabled = true;
+            playerController2.enabled = true;
         }
     }
 
@@ -191,6 +192,7 @@ public class WardrobeController : MonoBehaviour
                 {
                     if (isOpen)
                     {
+                        playerController2.enabled = false;
                         chc.enabled = false;
                         cc.enabled = false;
                         pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
@@ -210,6 +212,7 @@ public class WardrobeController : MonoBehaviour
                         // Check if the required item is in the player's inventory
                         if (requiredItemName == "" || hasCycled || (!LockedByDefault))
                         {
+                            playerController2.enabled = false;
                             chc.enabled = false;
                             cc.enabled = false;
                             pc.identifier = gameObject.GetComponent<WardrobeController>().identifier;
