@@ -65,7 +65,13 @@ public class SC_NPCFollow : MonoBehaviour
     //Improved stationarytimer method
     private Vector3 lastPosition;
     private float timer;
+    private float timer1;
     private int stuckTimes = 0;
+    bool once = false;
+
+    //enemy teleport
+    public float maxDistance;
+    public int maxAttempts = 10;
 
     void Start()
     {
@@ -76,6 +82,7 @@ public class SC_NPCFollow : MonoBehaviour
         enemyHealthScript = GetComponent<EnemyHealth>();
         ToggleVisibilityAndInteractivity(false);
         NotSpawned();
+        once = false;
     }
 
     void Update()
@@ -101,6 +108,11 @@ public class SC_NPCFollow : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             currentState = State.FirstHide;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            Debug.Log("6");
+            MoveToRandomPointOnNavMesh();
         }
 
         if (enemyHealthScript.enemyHealth < 50)
@@ -168,14 +180,14 @@ public class SC_NPCFollow : MonoBehaviour
             }
         }
     }
-
+    public float positionThreshold = 0;
     bool IsInSameArea()
     {
         // Adjust the threshold based on your requirements
-        float positionThreshold = 0.2f;
 
         // Compare the current position with the last position
         float distance = Vector3.Distance(transform.position, lastPosition);
+       // Debug.Log("Distance from last pos:" + distance);
 
         // Check if the distance is within the threshold
         return distance <= positionThreshold;
@@ -276,7 +288,9 @@ public class SC_NPCFollow : MonoBehaviour
         ToggleVisibilityAndInteractivity(true);
         Vector3 randomPoint = PointOutOfPlayerView();
             transform.position = randomPoint;
-            currentState = State.Patrol;
+        randomPoint = GetRandomPointOnNavMesh(5);
+        agent.SetDestination(randomPoint);
+        currentState = State.Patrol;
             isNotSpawnedCoroutineRunning = false;
     }
 
@@ -295,6 +309,7 @@ public class SC_NPCFollow : MonoBehaviour
         {
             currentState = Random.Range(0, 2) == 0 ? State.Chase : State.Flee;
         }
+
     }
 
     void Chase()
@@ -401,20 +416,58 @@ public class SC_NPCFollow : MonoBehaviour
             healthBar.gameObject.SetActive(isActive);
         }
     }
-
+    Vector3 randomPoint;
+    float currentDistance;
+    float distance;
+    bool foundDistance1;
     private void UpdateStationaryTimer()
     {
-        timer += Time.deltaTime;
-        if (timer > 2f)
+        if (!once)
         {
-            if (IsInSameArea())
+            randomPoint = GetRandomPointOnNavMesh(14);
+            once = true;
+        }
+        currentDistance = Vector3.Distance(transform.position, randomPoint);
+        //Debug.Log(transform.position + " " + randomPoint);
+        //Debug.Log("Current distance to point:" + currentDistance);
+        timer += Time.deltaTime;
+        timer1 += Time.deltaTime;
+        if (foundDistance1)
+        {
+            randomPoint = GetRandomPointOnNavMesh(14);
+            foundDistance1 = false;
+            agent.SetDestination(randomPoint);
+        }
+        if (timer1 > 0.5)
+        {
+            distance = Vector3.Distance(transform.position, randomPoint);
+            timer1 = -0.8f;
+        }
+        if (timer > 1f)
+        {
+            float distance2 = Vector3.Distance(transform.position, randomPoint);
+            //Debug.Log("Distance 1:" + distance);
+            // Debug.Log("Distance 2:" + distance2);
+            if ((distance2) < (distance - 0.2))
             {
-                Debug.Log(transform.position);
+                //Debug.Log("Enemy is following the same path");
                 timer = 0f;
-                Vector3 randomPoint = GetRandomPointOnNavMesh(20);
-                agent.SetDestination(randomPoint);
-                Debug.Log("Choosing new patrol point: " + randomPoint);
             }
+        }
+        if (currentDistance <2)
+        {
+            foundDistance1 = true;
+            Debug.Log("Chose a new patrol point.");
+        }
+        if (IsInSameArea())
+        {
+            //Debug.Log("Enemy is stuck");
+            timer1 = 0f;
+            timer = 0f;
+            randomPoint = PointOutOfPlayerView();
+            MoveToRandomPointOnNavMesh();
+            Debug.LogWarning("Teleported, New destination: " + randomPoint);
+            agent.SetDestination(randomPoint);
         }
     }
 
@@ -491,10 +544,52 @@ public class SC_NPCFollow : MonoBehaviour
         {
             finalPosition = hit.position;
         }
-        Debug.Log("Random NavMesh Point: " + finalPosition);
+        //Debug.Log("Random NavMesh Point: " + finalPosition);
         return finalPosition;
     }
 
+    public void MoveToRandomPointOnNavMesh()
+    {
+        // Get the current position of the agent
+        Vector3 currentPosition = transform.position;
+
+        // Attempt to find a valid random direction
+        Vector3 randomDirection = Vector3.zero;
+        int attempts = 0;
+
+        while (attempts < maxAttempts)
+        {
+            randomDirection = Random.onUnitSphere * maxDistance;
+            randomDirection += currentPosition;
+
+            // Check if the randomDirection is not { Infinity, Infinity, Infinity } or {0,0,0}
+            if (!float.IsInfinity(randomDirection.x) && !float.IsInfinity(randomDirection.y) && !float.IsInfinity(randomDirection.z)
+                && randomDirection != Vector3.zero)
+            {
+                break;
+            }
+
+            attempts++;
+        }
+
+        if (attempts == maxAttempts)
+        {
+            //can't find a valid direction lol
+            return;
+        }
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, maxDistance, NavMesh.AllAreas))
+        {
+            // Move the agent to the found position
+            transform.position = (hit.position);
+            attempts = 0;
+        }
+        else
+        {
+            Debug.Log("Unable to find a valid position :(");
+        }
+    }
     public State GetCurrentState()
     {
         return currentState;
