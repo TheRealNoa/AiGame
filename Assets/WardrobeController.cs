@@ -1,3 +1,4 @@
+using EvolveGames;
 using System.Collections;
 using UnityEngine;
 using XEntity.InventoryItemSystem;
@@ -30,7 +31,7 @@ public class WardrobeController : MonoBehaviour
     PlayerMove pm;
 
     CapsuleCollider cc;
-    CharacterController chc;
+    PlayerController chc;
 
 
     public bool isInside;
@@ -45,7 +46,7 @@ public class WardrobeController : MonoBehaviour
         playerAnimator = player.GetComponent<Animator>();
         pm = player.GetComponent<PlayerMove>();
         cc = player.GetComponent<CapsuleCollider>();
-        chc = player.GetComponent<CharacterController>();
+        chc = player.GetComponent<PlayerController>();
 
 
 
