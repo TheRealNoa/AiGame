@@ -12,7 +12,7 @@ public class SC_NPCFollow : MonoBehaviour
     private EnemyHealth enemyHealthScript;
 
     // State Parameters
-    public enum State { NotSpawned, Patrol, Chase, Flee, EndNotSpawned, EndPatrol, EndChase, EndFlee, FirstHide }
+    public enum State { NotSpawned, Patrol, Chase, Flee, goHeal, EndNotSpawned, EndPatrol, EndChase, EndFlee, FirstHide }
     public State currentState = State.NotSpawned;
 
     // Patrol State Parameters
@@ -111,12 +111,13 @@ public class SC_NPCFollow : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            Debug.Log("6");
-            MoveToRandomPointOnNavMesh();
+            currentState = State.goHeal;
         }
+       
 
         if (enemyHealthScript.enemyHealth < 50)
         {
+            currentState = State.goHeal;
             switch (currentState)
             {
                 case State.EndNotSpawned:
@@ -135,6 +136,10 @@ public class SC_NPCFollow : MonoBehaviour
                     agent.speed = endFleeSpeed;
                     EndFlee();
                     UpdateStationaryTimer();
+                    break;
+                case State.goHeal:
+                    agent.speed = fleeSpeed;
+                    goHeal();
                     break;
             }
         }
@@ -177,6 +182,10 @@ public class SC_NPCFollow : MonoBehaviour
                     }
                     FirstHide();
                     break;
+                case State.goHeal:
+                    agent.speed = fleeSpeed;
+                    goHeal();
+                    break;
             }
         }
     }
@@ -192,6 +201,61 @@ public class SC_NPCFollow : MonoBehaviour
         // Check if the distance is within the threshold
         return distance <= positionThreshold;
     }
+
+    private bool destinationSet;
+    private bool inHealRoom;
+    private Vector3 destination;
+    private Vector3 healRoomCoordinates = new Vector3(-16.91f, -23.813f, 10.811f);
+    bool goh;
+    bool teleported1;
+    void goHeal()
+    {
+        if (!goh)
+        {
+        if (!destinationSet)
+        {
+            destination = PointOutOfPlayerView();
+            destinationSet = true;
+            inHealRoom = false; // Reset inHealRoom flag when setting a new destination
+        }
+
+        if (!inHealRoom)
+        {
+            agent.SetDestination(destination);
+        }
+
+            if (destination != null)
+            {
+                double distance = Vector3.Distance(transform.position, destination) - 1;
+                //Debug.Log("Distance to destination: " + distance);
+
+                if (distance < 0.001)
+                {
+
+                    TeleportAgent(healRoomCoordinates);
+                    teleported1 = true;
+                    inHealRoom = true;
+                }
+            }
+        }
+        if (teleported1)
+        {
+            if (enemyHealthScript.getHP() >= 98)
+            {
+                currentState = State.Patrol;
+            }
+        }
+    }
+
+    void TeleportAgent(Vector3 targetPosition)
+    {
+        agent.enabled = false;
+        transform.position = healRoomCoordinates;
+        agent.enabled = true;
+        agent.SetDestination(transform.position);
+    }
+
+
 
     void FirstHide()
     {
@@ -495,7 +559,7 @@ public class SC_NPCFollow : MonoBehaviour
         const int maxAttempts = 10;
         for (int i = 0; i < maxAttempts; i++)
         {
-            float fleeDistance = Random.Range(20f, 60f);
+            float fleeDistance = Random.Range(10f, 14f);
             Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * fleeDistance;
             randomDirection += transform.position;
 
@@ -513,7 +577,7 @@ public class SC_NPCFollow : MonoBehaviour
                 transform.position = originalPosition;
             }
         }
-        return GetRandomPointOnNavMesh(40f);
+        return GetRandomPointOnNavMesh(14f);
     }
 
     void CheckAndAttackPlayer()

@@ -38,6 +38,7 @@ public class CollisionDetection : MonoBehaviour
     {
         while (enemyHealth.getHP() < 98)
         {
+            Debug.Log("Enemy healing");
             enemyHealth.HealEnemy(2 * healMultiplier);
             yield return new WaitForSeconds(0.5f);
         }

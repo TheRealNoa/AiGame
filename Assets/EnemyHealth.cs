@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Microlight.MicroBar;
 using System.Security;
+using Unity.VisualScripting;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -46,7 +47,6 @@ public class EnemyHealth : MonoBehaviour
 
 
     }
-
     IEnumerator HurtEnemyRepeatedly()
     {
         while (true)
@@ -64,15 +64,25 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            HurtEnemy(60);
+        }
+    }
+
     void HurtEnemy(float damage)
     {
         // Your logic to hurt the enemy
         enemyHP -= damage;
+        showingHP -= damage;
     }
 
     public void HealEnemy(float heal)
     {
-        _enemyHP += heal;
+        enemyHP += heal;
+        showingHP += heal;
     }
 
     public double getHP()
