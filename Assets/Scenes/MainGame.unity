@@ -2583,6 +2583,7 @@ MonoBehaviour:
   identifier: 0
   inCloset: 
   outCloset: 
+  playerHidden: 0
 --- !u!95 &109232224
 Animator:
   serializedVersion: 5
@@ -9790,6 +9791,7 @@ GameObject:
   - component: {fileID: 471687559}
   - component: {fileID: 471687561}
   - component: {fileID: 471687562}
+  - component: {fileID: 471687563}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -9838,6 +9840,7 @@ MonoBehaviour:
   pathActivated: 0
   StartPosition: {x: -12.702, y: 12.237, z: -8.407}
   EndPosition: {x: 0, y: 0, z: 0}
+  checkedForPlayer: 0
 --- !u!195 &471687551
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10038,6 +10041,33 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 532721442}
   pathActivated: 0
+--- !u!54 &471687563
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471687549}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &472641143 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4282848018816662437, guid: fbd32f9bb8ae92d4387de1ef7d5d155d, type: 3}
@@ -20175,6 +20205,7 @@ PrefabInstance:
     - {fileID: 8604460299719507966, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
     - {fileID: 8605203317486871908, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
     - {fileID: 8604527676424436686, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
+    - {fileID: 8605159632437725972, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8601886773751821610, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
       insertIndex: -1

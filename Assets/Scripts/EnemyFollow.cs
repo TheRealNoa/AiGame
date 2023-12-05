@@ -41,6 +41,13 @@ public class SC_NPCFollow : MonoBehaviour
     public float endChaseSpeed = 4.0f;
     public float endPatrolSpeed = 3.0f;
 
+    //Enemy node route 1 Param.
+    public Vector3 StartPosition;
+    public Vector3 EndPosition;
+    private bool isGoingOnPath;
+    private bool playerNoticed;
+    public bool checkedForPlayer;
+
     private bool isNotSpawnedCoroutineRunning = false;
 
     GameObject player;
@@ -52,15 +59,19 @@ public class SC_NPCFollow : MonoBehaviour
     SC_NPCFollow enemyFollow;
     float enemySpeed;
 
-    float forwardSpeed;
 
     public bool pathActivated;
+
+    //Improved stationarytimer method
+    private Vector3 lastPosition;
+    private float timer;
+    private int stuckTimes = 0;
 
     void Start()
     {
         player = GameObject.Find("Player");
         pc = player.GetComponent<playerController>();
-
+        lastPosition = transform.position;
         agent = GetComponent<NavMeshAgent>();
         enemyHealthScript = GetComponent<EnemyHealth>();
         ToggleVisibilityAndInteractivity(false);
@@ -69,8 +80,6 @@ public class SC_NPCFollow : MonoBehaviour
 
     void Update()
     {
-        float forwardSpeed = Vector3.Dot(agent.velocity.normalized, transform.forward);
-        Debug.Log(forwardSpeed);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -128,6 +137,12 @@ public class SC_NPCFollow : MonoBehaviour
                     }
                     break;
                 case State.Patrol:
+                    if (!checkedLastPos)
+                    {
+                        StartCoroutine(changeLastPos());
+                        checkedLastPos = true;
+
+                    }
                     agent.speed = patrolSpeed;
                     Patrol();
                     UpdateStationaryTimer();
@@ -154,11 +169,18 @@ public class SC_NPCFollow : MonoBehaviour
         }
     }
 
-    public Vector3 StartPosition;
-    public Vector3 EndPosition;
-    private bool isGoingOnPath;
-    private bool playerNoticed;
-    public bool checkedForPlayer;
+    bool IsInSameArea()
+    {
+        // Adjust the threshold based on your requirements
+        float positionThreshold = 0.2f;
+
+        // Compare the current position with the last position
+        float distance = Vector3.Distance(transform.position, lastPosition);
+
+        // Check if the distance is within the threshold
+        return distance <= positionThreshold;
+    }
+
     void FirstHide()
     {
         if(!playerNoticed)
@@ -230,6 +252,19 @@ public class SC_NPCFollow : MonoBehaviour
 
 
     // Start States
+    void spawned()
+    {
+        Debug.Log("Spawning");
+        ToggleVisibilityAndInteractivity(true);
+        Vector3 randomPoint = PointOutOfPlayerView();
+        transform.position = randomPoint;
+        currentState = State.Patrol;
+        isNotSpawnedCoroutineRunning = false;
+    }
+    void despawdned()
+    {
+        ToggleVisibilityAndInteractivity(false);
+    }
     IEnumerator NotSpawned()
     {
         Debug.Log("Not Spawned");
@@ -240,9 +275,17 @@ public class SC_NPCFollow : MonoBehaviour
         Debug.Log("Spawning");
         ToggleVisibilityAndInteractivity(true);
         Vector3 randomPoint = PointOutOfPlayerView();
-        transform.position = randomPoint;
-        currentState = State.Patrol;
-        isNotSpawnedCoroutineRunning = false;
+            transform.position = randomPoint;
+            currentState = State.Patrol;
+            isNotSpawnedCoroutineRunning = false;
+    }
+
+    bool checkedLastPos;
+    IEnumerator changeLastPos()
+    {
+        yield return new WaitForSeconds(1);
+        lastPosition = transform.position;
+        checkedLastPos = false;
     }
 
     void Patrol()
@@ -361,21 +404,17 @@ public class SC_NPCFollow : MonoBehaviour
 
     private void UpdateStationaryTimer()
     {
-        if (forwardSpeed<0.5)
+        timer += Time.deltaTime;
+        if (timer > 2f)
         {
-            stationaryTimer += Time.deltaTime;
-
-            if (stationaryTimer > 2f)
+            if (IsInSameArea())
             {
-                stationaryTimer = 0f;
+                Debug.Log(transform.position);
+                timer = 0f;
                 Vector3 randomPoint = GetRandomPointOnNavMesh(20);
                 agent.SetDestination(randomPoint);
                 Debug.Log("Choosing new patrol point: " + randomPoint);
             }
-        }
-        else
-        {
-            stationaryTimer = 0f;
         }
     }
 
