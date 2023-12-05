@@ -5,43 +5,55 @@ using UnityEngine.Apple;
 
 public class SC_NPCFollow : MonoBehaviour
 {
+    [Header("Movement Settings")]
     public Transform transformToFollow;
     public Animations scriptInstance;
 
     public NavMeshAgent agent;
+
     private EnemyHealth enemyHealthScript;
 
-    // State Parameters
     public enum State { NotSpawned, Patrol, Chase, Flee, goHeal, EndNotSpawned, EndPatrol, EndChase, EndFlee, FirstHide }
+    [Header("ENEMY STATE CONTROL:")]
     public State currentState = State.NotSpawned;
 
-    // Patrol State Parameters
-    public float patrolWaitTime = 2f;
-    private float stationaryTimer = 0f;
+    [Space(15)]
 
-    // Chase State Parameters
+    [Header("Patrol State Parameters:")]
+    public float patrolWaitTime = 2f;
+    [Header("Chase State Parameters:")]
     public float chaseDuration = 30f;
     private float chaseTimer = 0f;
-
-    // Fleeing paramaters
+    [Header("Fleeing paramaters:")]
     private bool isFleeingDueToFlashlight = false;
     bool IsFleePointSet = false;
-
-    // Attack Parameters
-    public float stoppingDistance = 0.001f;
-    public float hurtInterval = 3f;
+    [Header("Attack Parameters:")]
+    [Range(0f, 1f)]
+    public float stoppingDistance;
+    [Range(0f, 10f)]
+    public float hurtInterval;
+    [Range(0f, 10f)]
     public float attackDistance = 3f;
+    [Range(0f, 5f)]
     public float hurtAmount = 1f;
+    
     private bool canAttack = true;
-
+    [Range(0f, 5f)]
     public float patrolSpeed = 1.5f;
+    [Range(0f, 7f)]
     public float chaseSpeed = 2.5f;
+    [Range(0f, 7f)]
     public float fleeSpeed = 5.0f;
+    [Range(0f, 7f)]
     public float endFleeSpeed = 8.0f;
+    [Range(0f, 7f)]
     public float endChaseSpeed = 4.0f;
+    [Range(0f, 7f)]
     public float endPatrolSpeed = 3.0f;
 
-    //Enemy node route 1 Param.
+    [Space(15)]
+
+    [Header("Enemy node route 1 Parameters:")]
     public Vector3 StartPosition;
     public Vector3 EndPosition;
     private bool isGoingOnPath;
@@ -192,13 +204,7 @@ public class SC_NPCFollow : MonoBehaviour
     public float positionThreshold = 0;
     bool IsInSameArea()
     {
-        // Adjust the threshold based on your requirements
-
-        // Compare the current position with the last position
         float distance = Vector3.Distance(transform.position, lastPosition);
-       // Debug.Log("Distance from last pos:" + distance);
-
-        // Check if the distance is within the threshold
         return distance <= positionThreshold;
     }
 
@@ -216,7 +222,7 @@ public class SC_NPCFollow : MonoBehaviour
         {
             destination = PointOutOfPlayerView();
             destinationSet = true;
-            inHealRoom = false; // Reset inHealRoom flag when setting a new destination
+            inHealRoom = false;
         }
 
         if (!inHealRoom)
@@ -587,10 +593,17 @@ public class SC_NPCFollow : MonoBehaviour
         {
             Hurt(hurtAmount);
             canAttack = false;
-            Invoke("ResetAttack", hurtInterval);
+            StartCoroutine(ResetAttack(hurtInterval));
         }
     }
 
+
+    IEnumerator ResetAttack(float interval)
+    {
+        yield return new WaitForSeconds(interval);
+        canAttack = true;
+        Debug.LogWarning("Reset the attack.");
+    }
     public void Hurt(float damage)
     {
         PlayerStats.Instance.TakeDamage(damage);
@@ -614,10 +627,8 @@ public class SC_NPCFollow : MonoBehaviour
 
     public void MoveToRandomPointOnNavMesh()
     {
-        // Get the current position of the agent
         Vector3 currentPosition = transform.position;
 
-        // Attempt to find a valid random direction
         Vector3 randomDirection = Vector3.zero;
         int attempts = 0;
 
@@ -626,7 +637,7 @@ public class SC_NPCFollow : MonoBehaviour
             randomDirection = Random.onUnitSphere * maxDistance;
             randomDirection += currentPosition;
 
-            // Check if the randomDirection is not { Infinity, Infinity, Infinity } or {0,0,0}
+            // I had some { Infinity, Infinity, Infinity } or {0,0,0} errors so eh... check, check, checkk
             if (!float.IsInfinity(randomDirection.x) && !float.IsInfinity(randomDirection.y) && !float.IsInfinity(randomDirection.z)
                 && randomDirection != Vector3.zero)
             {
@@ -645,7 +656,6 @@ public class SC_NPCFollow : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomDirection, out hit, maxDistance, NavMesh.AllAreas))
         {
-            // Move the agent to the found position
             transform.position = (hit.position);
             attempts = 0;
         }

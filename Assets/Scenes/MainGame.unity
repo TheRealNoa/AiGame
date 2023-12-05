@@ -9823,13 +9823,13 @@ MonoBehaviour:
   patrolWaitTime: 2
   chaseDuration: 30
   stoppingDistance: 0.7
-  hurtInterval: 0.5
+  hurtInterval: 1
   attackDistance: 2.6
   hurtAmount: 1
   patrolSpeed: 3
   chaseSpeed: 5
   fleeSpeed: 5
-  endFleeSpeed: 8
+  endFleeSpeed: 7
   endChaseSpeed: 4
   endPatrolSpeed: 3
   StartPosition: {x: -12.702, y: 12.237, z: -8.407}
