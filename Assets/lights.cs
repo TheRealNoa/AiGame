@@ -35,10 +35,12 @@ public class ObjectLightController : MonoBehaviour
             GameObject hitObject = hit.collider.gameObject;
             if (hit.collider == targetCollider)
             {
+                enemyFuseBox.probabilityToTurnLightsOff += percentageAddition;
                 foreach (Light lightObject in lightsList)
                 {
                     LightToggle lightToggle = lightObject.GetComponent<LightToggle>();
-                    enemyFuseBox.probabilityToTurnLightsOff += percentageAddition;// adds x chance for enemy to turn off all lights
+                    //enemyFuseBox.probabilityToTurnLightsOff += percentageAddition;// adds x chance for enemy to turn off all lights
+                    // It was too much so I changed it to "Per activation"
                                                                       ///--------------------NOTE
                                                                       /// This is PER LIGHT SOURCE in the list of lights
                                                                       /// ... meaning, if a switch activates 1 light, we add x%;

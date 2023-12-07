@@ -12,8 +12,6 @@ public class RayCastDetection : MonoBehaviour
 
     private void Start()
     {
-        GameObject Player = GameObject.Find("Flashlight");
-        ft = Player.GetComponent<FlashlightToggle>();
 
         // Assign the SC_NPCFollow script
         enemyFollowScript = GetComponent<SC_NPCFollow>();
@@ -21,6 +19,11 @@ public class RayCastDetection : MonoBehaviour
 
     void Update()
     {
+        GameObject Player = GameObject.Find("Flashlight");
+        if(Player != null)
+        {
+            ft = Player.GetComponent<FlashlightToggle>();
+        }
         // Cast a ray from the camera to check if it hits this object
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, raycastDistance))

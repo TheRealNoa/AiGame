@@ -32,8 +32,6 @@ public class Animations : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        GameObject flscript = GameObject.Find("Flashlight");
-        flashlight = flscript.GetComponent<FlashlightToggle>();
         GameObject enemy = GameObject.Find("Enemy");
         enemyFollow = enemy.GetComponent<SC_NPCFollow>();
 
@@ -45,6 +43,13 @@ public class Animations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        GameObject flscript = GameObject.Find("Flashlight");
+        if(flscript != null )
+        {
+            flashlight = flscript.GetComponent<FlashlightToggle>();
+        }
 
         SC_NPCFollow.State fleeState = SC_NPCFollow.State.Flee;
         SC_NPCFollow.State chaseState = SC_NPCFollow.State.Chase;
