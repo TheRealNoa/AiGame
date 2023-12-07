@@ -11,19 +11,20 @@ namespace EvolveGames
         [Header("PlayerController")]
         [SerializeField] public Transform Camera;
         [SerializeField] public ItemChange Items;
-        [SerializeField, Range(1, 10)] float walkingSpeed = 3.0f;
-        [Range(0.1f, 5)] public float CroughSpeed = 1.0f;
-        [SerializeField, Range(2, 20)] float RuningSpeed = 4.0f;
-        [SerializeField, Range(0, 20)] float jumpSpeed = 6.0f;
-        [SerializeField, Range(0.5f, 10)] float lookSpeed = 2.0f;
-        [SerializeField, Range(10, 120)] float lookXLimit = 80.0f;
+        [SerializeField, Range(1, 10)] float walkingSpeed;
+        [Range(0.1f, 5)] public float CroughSpeed;
+        [Range(2, 20)]
+        public float RuningSpeed;
+        [SerializeField, Range(0, 20)] float jumpSpeed;
+        [SerializeField, Range(0.5f, 10)] float lookSpeed;
+        [SerializeField, Range(10, 120)] float lookXLimit;
         [Space(20)]
         [Header("Advance")]
-        [SerializeField] float RunningFOV = 65.0f;
-        [SerializeField] float SpeedToFOV = 4.0f;
-        [SerializeField] float CroughHeight = 1.0f;
-        [SerializeField] float gravity = 20.0f;
-        [SerializeField] float timeToRunning = 2.0f;
+        [SerializeField] float RunningFOV ;
+        [SerializeField] float SpeedToFOV ;
+        [SerializeField] float CroughHeight ;
+        [SerializeField] float gravity ;
+        [SerializeField] float timeToRunning;
         [HideInInspector] public bool canMove = true;
         [HideInInspector] public bool CanRunning = true;
 
@@ -36,7 +37,7 @@ namespace EvolveGames
         [Space(20)]
         [Header("HandsHide")]
         [SerializeField] bool CanHideDistanceWall = true;
-        [SerializeField, Range(0.1f, 5)] float HideDistance = 1.5f;
+        [SerializeField, Range(0.1f, 5)] float HideDistance;
         [SerializeField] int LayerMaskInt = 1;
 
         [Space(20)]
