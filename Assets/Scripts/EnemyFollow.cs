@@ -536,7 +536,7 @@ public class SC_NPCFollow : MonoBehaviour
             timer = 0f;
             randomPoint = PointOutOfPlayerView();
             MoveToRandomPointOnNavMesh();
-            Debug.LogWarning("Teleported, New destination: " + randomPoint);
+            Debug.Log("Teleported, New destination: " + randomPoint);
             agent.SetDestination(randomPoint);
         }
     }
