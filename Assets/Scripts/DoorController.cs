@@ -5,11 +5,11 @@ using XEntity.InventoryItemSystem;
 
 public class DoorController : MonoBehaviour
 {
-    public float interactionRange = 2.0f; // Adjust this to your desired interaction range
-    public string openAnimationName; // Name of the door's open animation
-    public string closeAnimationName; // Name of the door's close animation
+    public float interactionRange = 2.0f;
+    public string openAnimationName; 
+    public string closeAnimationName;
     public bool LockedByDefault = false;
-    public string requiredItemName; // Name of the item required to open the door
+    public string requiredItemName;
 
     private Animator doorAnimator;
     private bool isOpen = false;
@@ -32,10 +32,8 @@ public class DoorController : MonoBehaviour
             firstDoorController = firstdoor.GetComponent<DoorController>();
         }
 
-        // Find objects with ItemContainer component
         ItemContainer[] containers = FindObjectsOfType<ItemContainer>();
 
-        // Choose the first valid container
         foreach (ItemContainer container in containers)
         {
             if (container != null)
@@ -47,7 +45,6 @@ public class DoorController : MonoBehaviour
 
         removal = FindObjectOfType<ItemRemovalController>();
 
-        // Check if playerInventory is still null
         if (playerInventory == null)
         {
             Debug.LogWarning("ItemContainer not found in the scene or doesn't have the required component.");
@@ -70,9 +67,12 @@ public class DoorController : MonoBehaviour
     {
         if (!isOpen)
         {
-            doorAnimator.Play(openAnimationName);
-            isOpen = true;
-            Debug.Log("Door opened by enemy");
+            if(!this.LockedByDefault)
+            {
+                doorAnimator.Play(openAnimationName);
+                isOpen = true;
+                Debug.Log("Door opened by enemy");
+            }
         }
     }
 
@@ -83,13 +83,10 @@ public class DoorController : MonoBehaviour
 
     private void RemoveItem()
     {
-        // Check if the player's inventory is assigned
         if (playerInventory != null)
         {
-            // Check if the inventory contains the item
             if (playerInventory.ContainsItemName(requiredItemName))
             {
-                // Find the slot with the item and remove it
                 ItemSlot slotToRemove = FindItemSlot(requiredItemName);
                 if (slotToRemove != null)
                 {
@@ -109,10 +106,8 @@ public class DoorController : MonoBehaviour
 
     private ItemSlot FindItemSlot(string itemName)
     {
-        // Get the list of slots from the ItemContainer
         var slots = playerInventory.GetSlots();
 
-        // Iterate through the inventory slots and find the slot with the specified item
         foreach (ItemSlot slot in slots)
         {
             if (!slot.IsEmpty && slot.slotItem.name == itemName)
@@ -139,7 +134,6 @@ public class DoorController : MonoBehaviour
                     }
                     else
                     {
-                        // Check if the required item is in the player's inventory
                         if (requiredItemName == "" || hasCycled || (!LockedByDefault))
                         {
                             doorAnimator.Play(openAnimationName);
