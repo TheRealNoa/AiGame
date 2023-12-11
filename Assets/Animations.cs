@@ -14,11 +14,11 @@ public class Animations : MonoBehaviour
     public bool ranAway;
     // Start is called before the first frame update
     FlashlightToggle flashlight;
-    SC_NPCFollow enemyFollow;
-    SC_NPCFollow.State currentState;
-    SC_NPCFollow.State fleeState;
-    SC_NPCFollow.State chaseState;
-    SC_NPCFollow.State patrolState;
+    EnemyFollow enemyFollow;
+    EnemyFollow.State currentState;
+    EnemyFollow.State fleeState;
+    EnemyFollow.State chaseState;
+    EnemyFollow.State patrolState;
 
     public NavMeshAgent agent;
 
@@ -33,11 +33,11 @@ public class Animations : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         GameObject enemy = GameObject.Find("Enemy");
-        enemyFollow = enemy.GetComponent<SC_NPCFollow>();
+        enemyFollow = enemy.GetComponent<EnemyFollow>();
 
         agent = enemy.GetComponent<NavMeshAgent>();
 
-        //SC_NPCFollow.State currentState = enemyFollow.GetCurrentState();
+        //EnemyFollow.State currentState = enemyFollow.GetCurrentState();
     }
 
     // Update is called once per frame
@@ -51,12 +51,12 @@ public class Animations : MonoBehaviour
             flashlight = flscript.GetComponent<FlashlightToggle>();
         }
 
-        SC_NPCFollow.State fleeState = SC_NPCFollow.State.Flee;
-        SC_NPCFollow.State chaseState = SC_NPCFollow.State.Chase;
-        SC_NPCFollow.State patrolState = SC_NPCFollow.State.Patrol;
+        EnemyFollow.State fleeState = EnemyFollow.State.Flee;
+        EnemyFollow.State chaseState = EnemyFollow.State.Chase;
+        EnemyFollow.State patrolState = EnemyFollow.State.Patrol;
 
 
-        SC_NPCFollow.State currentState = enemyFollow.GetCurrentState();
+        EnemyFollow.State currentState = enemyFollow.GetCurrentState();
         if (currentState == fleeState)
         {
             anim.SetBool("RunToWalk", false);

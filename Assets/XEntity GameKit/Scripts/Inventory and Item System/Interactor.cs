@@ -6,6 +6,7 @@ namespace XEntity.InventoryItemSystem
     //This holds the different types of interaction events and interaction trigger methods.
     public class Interactor : MonoBehaviour
     {
+
         //Reference to the main game viewing camera.
         [SerializeField] private Camera mainCamera;
 
@@ -84,10 +85,15 @@ namespace XEntity.InventoryItemSystem
             if (inventory.AddItem(item))
             {
                 if (instance) Destroy(instance);
+
+                
+                
+
                 return true;
             }
             return false;
         }
+
 
         internal class InteractionTarget 
         {

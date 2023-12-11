@@ -3,7 +3,8 @@ using UnityEngine.AI;
 using System.Collections;
 using UnityEngine.Apple;
 
-public class SC_NPCFollow : MonoBehaviour
+
+public class EnemyFollow : MonoBehaviour
 {
     [Header("Movement Settings")]
     public Transform transformToFollow;
@@ -36,7 +37,7 @@ public class SC_NPCFollow : MonoBehaviour
     public float attackDistance = 3f;
     [Range(0f, 5f)]
     public float hurtAmount = 1f;
-    
+
     private bool canAttack = true;
     [Range(0f, 5f)]
     public float patrolSpeed = 1.5f;
@@ -68,7 +69,7 @@ public class SC_NPCFollow : MonoBehaviour
     [SerializeField] Transform[] PathPoints;
     private int pointIndex;
     bool firstPoint;
-    SC_NPCFollow enemyFollow;
+    EnemyFollow enemyFollow;
     float enemySpeed;
 
 
@@ -84,6 +85,10 @@ public class SC_NPCFollow : MonoBehaviour
     //enemy teleport
     public float maxDistance;
     public int maxAttempts = 10;
+
+    // item 
+    private int callCounter = 0;
+
 
     void Start()
     {
@@ -125,7 +130,7 @@ public class SC_NPCFollow : MonoBehaviour
         {
             currentState = State.goHeal;
         }
-       
+
 
         if (enemyHealthScript.enemyHealth < 50)
         {
@@ -155,7 +160,8 @@ public class SC_NPCFollow : MonoBehaviour
                     break;
             }
         }
-        else {
+        else
+        {
             switch (currentState)
             {
                 case State.NotSpawned:
@@ -218,17 +224,17 @@ public class SC_NPCFollow : MonoBehaviour
     {
         if (!goh)
         {
-        if (!destinationSet)
-        {
-            destination = PointOutOfPlayerView();
-            destinationSet = true;
-            inHealRoom = false;
-        }
+            if (!destinationSet)
+            {
+                destination = PointOutOfPlayerView();
+                destinationSet = true;
+                inHealRoom = false;
+            }
 
-        if (!inHealRoom)
-        {
-            agent.SetDestination(destination);
-        }
+            if (!inHealRoom)
+            {
+                agent.SetDestination(destination);
+            }
 
             if (destination != null)
             {
@@ -265,7 +271,7 @@ public class SC_NPCFollow : MonoBehaviour
 
     void FirstHide()
     {
-        if(!playerNoticed)
+        if (!playerNoticed)
         {
             float distanceToDestination = Vector3.Distance(transform.position, agent.destination);
             distanceToDestination = distanceToDestination - 1;
@@ -274,7 +280,7 @@ public class SC_NPCFollow : MonoBehaviour
                 pathActivated = true;
                 transform.position = (PathPoints[0].position);
                 distanceToDestination = Vector3.Distance(transform.position, agent.destination);
-                if(distanceToDestination > 0.2)
+                if (distanceToDestination > 0.2)
                 {
                     pointIndex++;
                     isGoingOnPath = true;
@@ -303,7 +309,8 @@ public class SC_NPCFollow : MonoBehaviour
                     }
                 }
             }
-        }else if(playerNoticed)
+        }
+        else if (playerNoticed)
         {
             currentState = State.Chase;
         }
@@ -357,11 +364,11 @@ public class SC_NPCFollow : MonoBehaviour
         Debug.Log("Spawning");
         ToggleVisibilityAndInteractivity(true);
         Vector3 randomPoint = PointOutOfPlayerView();
-            transform.position = randomPoint;
+        transform.position = randomPoint;
         randomPoint = GetRandomPointOnNavMesh(5);
         agent.SetDestination(randomPoint);
         currentState = State.Patrol;
-            isNotSpawnedCoroutineRunning = false;
+        isNotSpawnedCoroutineRunning = false;
     }
 
     bool checkedLastPos;
@@ -524,7 +531,7 @@ public class SC_NPCFollow : MonoBehaviour
                 timer = 0f;
             }
         }
-        if (currentDistance <2)
+        if (currentDistance < 2)
         {
             foundDistance1 = true;
             Debug.Log("Chose a new patrol point.");
@@ -691,5 +698,31 @@ public class SC_NPCFollow : MonoBehaviour
         agent.isStopped = false;
         currentState = State.Flee;
         isFleeingDueToFlashlight = false;
+    }
+
+    public void OnPlayerPickedUpItem()
+    {
+        // Implement the logic to be executed when the player picks up an item
+        Debug.Log("Player picked up an item. Enemy reacting accordingly.");
+        // ... additional code ...
+    }
+
+    public void ItemPickedUp()
+    {
+        Debug.Log("ItemPickedUp detected");
+        callCounter++; 
+        float probability = callCounter * 0.1f; 
+        probability = Mathf.Clamp(probability, 0f, 1f);
+        
+        if (Random.value < probability)
+        {
+            Debug.Log("State changed as result of item pick up");
+            currentState = State.Chase;
+        }
+    }
+
+    public void doorTriggered()
+    {
+        currentState = State.FirstHide;
     }
 }

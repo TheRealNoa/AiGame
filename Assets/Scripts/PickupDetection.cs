@@ -11,14 +11,14 @@ public class PickupDetection : MonoBehaviour
     public Item[] playerPickedItems;
     private GameObject enemy;
     bool pickedUp;
-    SC_NPCFollow enemyScript;
+    EnemyFollow enemyScript;
 
     public void Start()
     {
         GameObject finder = GameObject.Find("Item Manager");
         im = finder.GetComponent<ItemManager>();
         enemy = GameObject.Find("Enemy");
-        enemyScript = enemy.GetComponent<SC_NPCFollow>();
+        enemyScript = enemy.GetComponent<EnemyFollow>();
     }
 
     void Update()

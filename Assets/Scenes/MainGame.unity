@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.15
+  m_AmbientIntensity: 3.35
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.027
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1610177281}
-  m_IndirectSpecularColor: {r: 0.04004756, g: 0.041745096, b: 0.036892135, a: 0.027}
+  m_IndirectSpecularColor: {r: 0.040047556, g: 0.041745096, b: 0.036892135, a: 0.027}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1118,6 +1118,7 @@ GameObject:
   - component: {fileID: 30640862}
   - component: {fileID: 30640861}
   - component: {fileID: 30640860}
+  - component: {fileID: 30640865}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -1249,6 +1250,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 30640858}
   m_Mesh: {fileID: 4300002, guid: 30a37ce794ca1c94192e4d8721b12940, type: 3}
+--- !u!114 &30640865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30640858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c263727dea8e149902698f4bb69240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &36814085 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3445352999058701145, guid: 05e314c9e067138498f7c1e1f6aca83d, type: 3}

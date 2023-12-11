@@ -7,14 +7,14 @@ public class RayCastDetection : MonoBehaviour
     public bool isSpecial;
 
     private FlashlightToggle ft;
-    private SC_NPCFollow enemyFollowScript;
+    private EnemyFollow enemyFollowScript;
     private bool hasTriggeredPause = false;
 
     private void Start()
     {
 
-        // Assign the SC_NPCFollow script
-        enemyFollowScript = GetComponent<SC_NPCFollow>();
+        // Assign the EnemyFollow script
+        enemyFollowScript = GetComponent<EnemyFollow>();
     }
 
     void Update()

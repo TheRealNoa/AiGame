@@ -20,11 +20,11 @@ public class PickupChecker : MonoBehaviour
 
     [SerializeField] GameObject enemy;
 
-    SC_NPCFollow enemyMain;
+    EnemyFollow enemyMain;
 
     private void Start()
     {
-        enemyMain = enemy.GetComponent<SC_NPCFollow>();
+        enemyMain = enemy.GetComponent<EnemyFollow>();
         GameObject[] keys = GameObject.FindGameObjectsWithTag("Selectable");
         foreach (GameObject obj in keys)
         {

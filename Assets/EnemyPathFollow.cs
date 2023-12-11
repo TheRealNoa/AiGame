@@ -8,13 +8,13 @@ public class EnemyPathFollow : MonoBehaviour
     [SerializeField] Transform[] PathPoints;
     private int pointIndex;
     bool firstPoint;
-    SC_NPCFollow enemyFollow;
+    EnemyFollow enemyFollow;
     float enemySpeed;
 
     public bool pathActivated;
     void Start()
     {
-        enemyFollow = GetComponent<SC_NPCFollow>();
+        enemyFollow = GetComponent<EnemyFollow>();
         enemySpeed = enemyFollow.patrolSpeed;
     }
 
