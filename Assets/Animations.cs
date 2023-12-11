@@ -12,6 +12,8 @@ public class Animations : MonoBehaviour
     public bool attack_state;
     public bool attacked;
     public bool ranAway;
+
+    public bool isBlocking;
     // Start is called before the first frame update
     FlashlightToggle flashlight;
     EnemyFollow enemyFollow;
@@ -154,6 +156,29 @@ public class Animations : MonoBehaviour
             anim.SetBool("IdleToWalk", true);
             anim.SetBool("RunToWalk", false);
             anim.SetBool("AttackToRun", false);
+        }
+       if (enemyFollow.isFleeingDueToFlashlight)
+        {
+            Debug.LogWarning("Enemy stunned.");
+            anim.SetBool("RunToWalk", false);
+            anim.SetBool("RunToAttack", false);
+            anim.SetBool("IdleToWalk", false);
+            anim.SetBool("AttackToRun", false);
+            anim.SetBool("WalkToRun", false);
+            anim.SetBool("RunToBlock", true);
+            anim.SetBool("AttackToBlock", true);
+            isBlocking = true;
+        }else if(isBlocking && !enemyFollow.isFleeingDueToFlashlight)
+        {
+            anim.SetBool("RunToWalk", false);
+            anim.SetBool("RunToAttack", false);
+            anim.SetBool("IdleToWalk", false);
+            anim.SetBool("AttackToRun", false);
+            anim.SetBool("WalkToRun", false);
+            anim.SetBool("RunToBlock", false);
+            anim.SetBool("AttackToBlock", false);
+            anim.SetBool("BlockToRun", true);
+            isBlocking = false;
         }
         
     }

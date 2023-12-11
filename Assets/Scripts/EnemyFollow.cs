@@ -26,7 +26,7 @@ public class EnemyFollow : MonoBehaviour
     public float chaseDuration = 30f;
     private float chaseTimer = 0f;
     [Header("Fleeing paramaters:")]
-    private bool isFleeingDueToFlashlight = false;
+    public bool isFleeingDueToFlashlight = false;
     bool IsFleePointSet = false;
     [Header("Attack Parameters:")]
     [Range(0f, 1f)]
@@ -51,6 +51,9 @@ public class EnemyFollow : MonoBehaviour
     public float endChaseSpeed = 4.0f;
     [Range(0f, 7f)]
     public float endPatrolSpeed = 3.0f;
+
+    [Range (0f,1f)]
+    public float chaseProbability;
 
     [Space(15)]
 
@@ -384,14 +387,23 @@ public class EnemyFollow : MonoBehaviour
         float distance = Vector3.Distance(transform.position, transformToFollow.position);
         if (distance <= attackDistance)
         {
-            currentState = Random.Range(0, 2) == 0 ? State.Chase : State.Flee;
+            float temp = Random.Range(0f, 1f);
+            
+            if (temp <= chaseProbability)
+            {
+                currentState = State.Chase;
+            }
+            else
+            {
+                currentState = State.Flee;
+            }
         }
 
     }
 
     void Chase()
     {
-        Debug.Log("Chasing");
+        //Debug.Log("Chasing");
         agent.SetDestination(transformToFollow.position);
         chaseTimer += Time.deltaTime;
 
@@ -406,7 +418,7 @@ public class EnemyFollow : MonoBehaviour
 
     void Flee()
     {
-        Debug.Log("Fleeing");
+        //Debug.Log("Fleeing");
         if (!IsFleePointSet)
         {
             Vector3 fleePoint = PointOutOfPlayerView();
@@ -609,7 +621,7 @@ public class EnemyFollow : MonoBehaviour
     {
         yield return new WaitForSeconds(interval);
         canAttack = true;
-        Debug.LogWarning("Reset the attack.");
+        Debug.Log("Reset the attack.");
     }
     public void Hurt(float damage)
     {

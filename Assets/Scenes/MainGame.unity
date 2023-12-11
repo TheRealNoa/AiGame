@@ -10979,6 +10979,7 @@ MonoBehaviour:
   currentState: 0
   patrolWaitTime: 2
   chaseDuration: 30
+  isFleeingDueToFlashlight: 0
   stoppingDistance: 0.7
   hurtInterval: 1
   attackDistance: 2.6
@@ -10989,6 +10990,7 @@ MonoBehaviour:
   endFleeSpeed: 7
   endChaseSpeed: 4
   endPatrolSpeed: 3
+  chaseProbability: 1
   StartPosition: {x: -12.702, y: 12.237, z: -8.407}
   EndPosition: {x: 0, y: 0, z: 0}
   checkedForPlayer: 0
@@ -24565,6 +24567,7 @@ MonoBehaviour:
   attack_state: 0
   attacked: 0
   ranAway: 0
+  isBlocking: 0
   agent: {fileID: 0}
   chased: 0
   fled: 0
