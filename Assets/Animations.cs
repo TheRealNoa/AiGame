@@ -54,6 +54,7 @@ public class Animations : MonoBehaviour
         EnemyFollow.State fleeState = EnemyFollow.State.Flee;
         EnemyFollow.State chaseState = EnemyFollow.State.Chase;
         EnemyFollow.State patrolState = EnemyFollow.State.Patrol;
+        EnemyFollow.State respawningState = EnemyFollow.State.NotSpawned;
 
 
         EnemyFollow.State currentState = enemyFollow.GetCurrentState();
@@ -88,15 +89,17 @@ public class Animations : MonoBehaviour
             {
                 anim.SetBool("AttackToRun", false);
                 anim.SetBool("WalkToRun", false);
-                anim.SetBool("WalkToAttack", false);
+                anim.SetBool("WalkToAttack", true);
                 anim.SetBool("RunToAttack", true);
                 damaged = true;
+                patrolled = false;
             }else
-            if (agent.remainingDistance <= enemyFollow.attackDistance && !patrolled) 
+            if (agent.remainingDistance <= enemyFollow.attackDistance && !patrolled && !damaged) 
             {
                 anim.SetBool("AttackToRun", false);
                 anim.SetBool("WalkToRun", false);
                 anim.SetBool("WalkToAttack", true);
+                anim.SetBool("RunToAttack", true);
                 damaged = true;
 
             }
@@ -125,7 +128,8 @@ public class Animations : MonoBehaviour
             {
                 anim.SetBool("RunToAttack", false);
                 anim.SetBool("WalkToRun", false);
-                anim.SetBool("RunToWalk", true);
+                anim.SetBool("RunToWalk", false);
+                anim.SetBool("IdleToWalk", true);
                 patrolled = true;
             }
             else if (damaged) 
@@ -135,9 +139,22 @@ public class Animations : MonoBehaviour
                 anim.SetBool("AttackToWalk", true);
                 patrolled = true;
             }
+            else
+            {
+                anim.SetBool("IdleToWalk", true);
+                anim.SetBool("RunToWalk", false);
+                anim.SetBool("AttackToWalk", false);
+            }
 
         }
-            
+        else if(currentState == respawningState)
+        {
+            anim.SetBool("RunToAttack", false);
+            anim.SetBool("WalkToAttack", false);
+            anim.SetBool("IdleToWalk", true);
+            anim.SetBool("RunToWalk", false);
+            anim.SetBool("AttackToRun", false);
+        }
         
     }
     public void setAttackState(bool state)
