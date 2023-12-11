@@ -5531,7 +5531,7 @@ GameObject:
   - component: {fileID: 263258236}
   - component: {fileID: 263258237}
   m_Layer: 0
-  m_Name: PickupDetector
+  m_Name: Player-Item Detections
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5545,12 +5545,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263258234}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0504208, y: 0.39555717, z: 11.477413}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.99998766, z: -0, w: 0.0049743694}
+  m_LocalPosition: {x: 4.7785244, y: 18.728397, z: -1.1350089}
+  m_LocalScale: {x: 1, y: 1.1111112, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 109232212}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &263258237
 MonoBehaviour:
@@ -5566,6 +5566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   playerPickedItems: []
+  specialNames:
+  - UpstairsDoubleDoor
 --- !u!1 &265074972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4226266102825855727, guid: 6b340773e6184894093e54c153dc6e90, type: 3}
@@ -5970,6 +5972,9 @@ PrefabInstance:
     - {fileID: 114153835938953748, guid: f5d302f654d753b48b8d1d35b0d67488, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4132826253243692, guid: f5d302f654d753b48b8d1d35b0d67488, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 263258236}
     - targetCorrespondingSourceObject: {fileID: 4961580549443336, guid: f5d302f654d753b48b8d1d35b0d67488, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1908950715}
@@ -13577,55 +13582,6 @@ MonoBehaviour:
   targetLight: {fileID: 618420335}
   canToggle: 0
   toggle: 0
---- !u!1 &621949799
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 621949801}
-  - component: {fileID: 621949802}
-  m_Layer: 0
-  m_Name: pickupChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &621949801
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621949799}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6261244, y: -2.3118467, z: 12.045937}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &621949802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621949799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f667f8489d7c82846a206c17f87e75e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specialNames:
-  - UpstairsDoubleDoor
-  - String2
-  - String3
-  enemy: {fileID: 471687549}
 --- !u!1 &627325797
 GameObject:
   m_ObjectHideFlags: 0
@@ -41811,14 +41767,12 @@ SceneRoots:
   - {fileID: 698045219}
   - {fileID: 1699949852}
   - {fileID: 839753351}
-  - {fileID: 263258236}
   - {fileID: 1484394697}
   - {fileID: 870176637}
   - {fileID: 543782304}
   - {fileID: 1917101786}
   - {fileID: 1279159849}
   - {fileID: 869215498}
-  - {fileID: 621949801}
   - {fileID: 685197614}
   - {fileID: 1273524678}
   - {fileID: 1764418935}
