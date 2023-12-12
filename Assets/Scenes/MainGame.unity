@@ -1033,6 +1033,7 @@ MonoBehaviour:
   - {fileID: 1500715434}
   - {fileID: 1631153604}
   targetCollider: {fileID: 29879435}
+  percentageAddition: 0.02
 --- !u!65 &29879435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5377,6 +5378,7 @@ MonoBehaviour:
   - {fileID: 453818310}
   - {fileID: 2000191408}
   targetCollider: {fileID: 250054133}
+  percentageAddition: 0.02
 --- !u!65 &250054133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14404,6 +14406,7 @@ MonoBehaviour:
   - {fileID: 1138401449}
   - {fileID: 2037266734}
   targetCollider: {fileID: 674533213}
+  percentageAddition: 0.02
 --- !u!65 &674533213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16497,6 +16500,7 @@ MonoBehaviour:
   - {fileID: 1452831698}
   - {fileID: 1709349465}
   targetCollider: {fileID: 745716219}
+  percentageAddition: 0.02
 --- !u!65 &745716219
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16818,6 +16822,7 @@ MonoBehaviour:
   - {fileID: 990666801}
   - {fileID: 524362645}
   targetCollider: {fileID: 781699741}
+  percentageAddition: 0.02
 --- !u!65 &781699741
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17290,6 +17295,7 @@ MonoBehaviour:
   - {fileID: 1944196796}
   - {fileID: 514629005}
   targetCollider: {fileID: 813860255}
+  percentageAddition: 0.02
 --- !u!65 &813860255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17845,6 +17851,7 @@ MonoBehaviour:
   - {fileID: 636143714}
   - {fileID: 857966909}
   targetCollider: {fileID: 853580405}
+  percentageAddition: 0.02
 --- !u!65 &853580405
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19075,6 +19082,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   targetCollider: {fileID: 941005930}
+  percentageAddition: 0.02
 --- !u!65 &941005930
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19152,6 +19160,7 @@ MonoBehaviour:
   - {fileID: 824375669}
   - {fileID: 2114951167}
   targetCollider: {fileID: 942425014}
+  percentageAddition: 0.02
 --- !u!65 &942425014
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19315,6 +19324,7 @@ MonoBehaviour:
   - {fileID: 1040531821}
   - {fileID: 1710852876}
   targetCollider: {fileID: 947912909}
+  percentageAddition: 0.02
 --- !u!65 &947912909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20151,6 +20161,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 1566420084}
   targetCollider: {fileID: 1009313876}
+  percentageAddition: 0.02
 --- !u!65 &1009313876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21312,6 +21323,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 319194293}
   targetCollider: {fileID: 1077441337}
+  percentageAddition: 0.02
 --- !u!65 &1077441337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24623,6 +24635,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 1524449551}
   targetCollider: {fileID: 1190777940}
+  percentageAddition: 0.02
 --- !u!65 &1190777940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25838,6 +25851,7 @@ MonoBehaviour:
   - {fileID: 1883304011}
   - {fileID: 440197484}
   targetCollider: {fileID: 1239187351}
+  percentageAddition: 0.02
 --- !u!65 &1239187351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26199,6 +26213,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 701665599}
   targetCollider: {fileID: 1267613017}
+  percentageAddition: 0.02
 --- !u!65 &1267613017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26825,6 +26840,7 @@ MonoBehaviour:
   - {fileID: 428298962}
   - {fileID: 6791049}
   targetCollider: {fileID: 1291778438}
+  percentageAddition: 0.02
 --- !u!65 &1291778438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28097,6 +28113,7 @@ MonoBehaviour:
   - {fileID: 1079524139}
   - {fileID: 481531322}
   targetCollider: {fileID: 1356495280}
+  percentageAddition: 0.02
 --- !u!65 &1356495280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28951,6 +28968,7 @@ MonoBehaviour:
   - {fileID: 1598129506}
   - {fileID: 462394157}
   targetCollider: {fileID: 1414073334}
+  percentageAddition: 0.02
 --- !u!65 &1414073334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30035,6 +30053,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 1109334076}
   targetCollider: {fileID: 1460517256}
+  percentageAddition: 0.02
 --- !u!65 &1460517256
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31606,6 +31625,7 @@ MonoBehaviour:
   - {fileID: 1764289792}
   - {fileID: 806645814}
   targetCollider: {fileID: 1547812127}
+  percentageAddition: 0.02
 --- !u!65 &1547812127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32432,6 +32452,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 883031451}
   targetCollider: {fileID: 1614193459}
+  percentageAddition: 0.02
 --- !u!65 &1614193459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32995,6 +33016,7 @@ MonoBehaviour:
   - {fileID: 1127336160}
   - {fileID: 1426578652}
   targetCollider: {fileID: 1652416062}
+  percentageAddition: 0.02
 --- !u!65 &1652416062
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33636,6 +33658,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 1952755147}
   targetCollider: {fileID: 1715674868}
+  percentageAddition: 0.02
 --- !u!65 &1715674868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34083,6 +34106,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 759665585}
   targetCollider: {fileID: 1734264615}
+  percentageAddition: 0.02
 --- !u!65 &1734264615
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36768,6 +36792,7 @@ MonoBehaviour:
   - {fileID: 618420335}
   - {fileID: 818094400}
   targetCollider: {fileID: 1891879558}
+  percentageAddition: 0.02
 --- !u!65 &1891879558
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38052,6 +38077,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 1547343229}
   targetCollider: {fileID: 1935307826}
+  percentageAddition: 0.02
 --- !u!65 &1935307826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39570,6 +39596,7 @@ MonoBehaviour:
   lightsList:
   - {fileID: 701665599}
   targetCollider: {fileID: 2032395723}
+  percentageAddition: 0.0547
 --- !u!65 &2032395723
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -8,13 +8,15 @@ public class ObjectLightController : MonoBehaviour
     private List<Light> lightsList = new List<Light>();
     [SerializeField]
     private BoxCollider targetCollider;
-    private float percentageAddition = 0.02f;
+    [Range(0f, 0.1f)]
+    public float percentageAddition = 0.05f;
 
     EnemyFuseBox enemyFuseBox;
     GameObject enemy;
 
     private void Start()
     {
+        percentageAddition = 0.013f;
         enemy = GameObject.Find("Enemy");
         enemyFuseBox = enemy.GetComponent<EnemyFuseBox>();
     }
@@ -36,6 +38,7 @@ public class ObjectLightController : MonoBehaviour
             if (hit.collider == targetCollider)
             {
                 enemyFuseBox.probabilityToTurnLightsOff += percentageAddition;
+                Debug.Log("Added to probability of enemy turning the light off");
                 foreach (Light lightObject in lightsList)
                 {
                     LightToggle lightToggle = lightObject.GetComponent<LightToggle>();
