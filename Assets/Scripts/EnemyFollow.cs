@@ -82,7 +82,7 @@ public class EnemyFollow : MonoBehaviour
     private Vector3 lastPosition;
     private float timer;
     private float timer1;
-    private int stuckTimes = 0;
+    //private int stuckTimes = 0;
     bool once = false;
 
     //enemy teleport

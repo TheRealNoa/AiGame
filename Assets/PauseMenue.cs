@@ -35,7 +35,6 @@ public class PauseMenue : MonoBehaviour
     }
     void ExitGameFunction()
     {
-    UnityEditor.EditorApplication.isPlaying = false;
     Application.Quit();
     }
 

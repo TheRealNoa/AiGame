@@ -122,7 +122,7 @@ namespace EvolveGames
                 {
                     moveDirection.y = movementDirectionY;
                 }
-                if (characterController.enabled = true) { characterController.Move(moveDirection * Time.deltaTime); }
+                if (characterController.enabled == true) { characterController.Move(moveDirection * Time.deltaTime); }
                 Moving = horizontal < 0 || vertical < 0 || horizontal > 0 || vertical > 0 ? true : false;
             }
 
